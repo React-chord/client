@@ -6,20 +6,14 @@
  * @flow
  */
 
-import React, { Component } from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
-import styles from "./src/styles/styles";
-import store from "./src/store/index";
+import React from 'react';
+import { Provider } from 'react-redux';
 
-export default class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <View style={styles.container}>
-          <Text style={styles.welcome}>Welcome to React Native!</Text>
-          <Text style={styles.instructions}>To get started, edit App.js</Text>
-        </View>
-      </Provider>
-    );
-  }
-}
+import store from './src/store/index';
+import Routes from './Routes';
+
+export default () => (
+  <Provider store={store}>
+    <Routes />
+  </Provider>
+);
