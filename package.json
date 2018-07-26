@@ -13,6 +13,7 @@
     "react-native-elements": "0.19.1",
     "react-native-permissions": "1.1.1",
     "react-native-recording": "0.4.1",
+    "react-native-vector-icons": "^4.6.0",
     "react-navigation": "2.9.2",
     "react-redux": "5.0.7",
     "react-thunk": "1.0.0",
