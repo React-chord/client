@@ -10,7 +10,10 @@ import {
   FormValidationMessage,
   ButtonGroup,
 } from 'react-native-elements';
+import firebase from 'react-native-firebase';
+import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
 
+// import { firebase } from '../helpers/firebase';
 import styles from '../styles/styles';
 
 class Login extends Component {
@@ -145,6 +148,22 @@ class Login extends Component {
     });
   };
 
+  loginByGoogle = async () => {
+    try {
+      await GoogleSignin.hasPlayServices({ autoResolve: true });
+      await GoogleSignin.configure();
+      const user = await GoogleSignin.signIn();
+      console.log('====================================');
+      console.log('login');
+      console.log(user);
+      console.log('====================================');
+    } catch (error) {
+      console.log('====================================');
+      console.log(error);
+      console.log('====================================');
+    }
+  };
+
   submit = () => {};
 
   renderLoginProperties = () => {
@@ -176,11 +195,11 @@ class Login extends Component {
             {formValidation.password.message}
           </FormValidationMessage>
         ) : null}
-        <Button
-          title="Login by Google"
-          leftIcon={{ type: 'material-community', name: 'google-plus' }}
-          containerViewStyle={{ marginBottom: 5 }}
-          backgroundColor="#03dac6"
+        <GoogleSigninButton
+          style={{ width: 'auto', height: 48, marginHorizontal: 12 }}
+          size={GoogleSigninButton.Size.Standard}
+          color={GoogleSigninButton.Color.Dark}
+          onPress={this.loginByGoogle}
         />
       </View>
     );
@@ -277,7 +296,7 @@ class Login extends Component {
               onPress={this.changeUserAction('register')}
             />
           </View>
-          <View>
+          <View className="form" style={{ flexWrap: 'wrap' }}>
             {userAction === 'login'
               ? this.renderLoginProperties()
               : this.renderRegisterProperties()}
