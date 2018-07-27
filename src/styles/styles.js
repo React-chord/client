@@ -24,6 +24,22 @@ const styles = StyleSheet.create({
   headlineText: {
     color: '#fff',
   },
+  formText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'normal',
+
+  },
+  formTextInput: {
+    color: '#fff',
+    fontSize: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: 'orange',
+  },
+  formTextContainer: {
+    backgroundColor: '#fff',
+    marginBottom: 5,
+  },
 });
 
 export default styles;
