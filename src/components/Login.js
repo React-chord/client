@@ -149,6 +149,7 @@ class Login extends Component {
 
   loginByGoogle = async () => {
     let provider = new firebase.auth.GoogleAuthProvider()
+    let result = firebase.auth().
   }
 
   submit = () => {};
