@@ -131,11 +131,12 @@ class Login extends Component {
           placeholder="E-mail"
         />
         {formValidation.email.message
-          && (
-          <FormValidationMessage>
-            {formValidation.email.message}
-          </FormValidationMessage>
+          ? (
+            <FormValidationMessage>
+              {formValidation.email.message}
+            </FormValidationMessage>
           )
+          : null
         }
         <FormInput
           containerStyle={styles.formTextContainer}
@@ -170,11 +171,12 @@ class Login extends Component {
           placeholder="Fullname"
         />
         {formValidation.fullname.message
-          && (
+          ? (
             <FormValidationMessage>
               {formValidation.fullname.message}
             </FormValidationMessage>
           )
+          : null
         }
         <FormInput
           containerStyle={styles.formTextContainer}
@@ -184,11 +186,12 @@ class Login extends Component {
           placeholder="E-mail"
         />
         {formValidation.email.message
-          && (
+          ? (
             <FormValidationMessage>
               {formValidation.email.message}
             </FormValidationMessage>
           )
+          : null
         }
         <FormInput
           containerStyle={styles.formTextContainer}
@@ -207,11 +210,12 @@ class Login extends Component {
           secureTextEntry
         />
         {formValidation.confirmPass.message
-          && (
+          ? (
             <FormValidationMessage>
               {formValidation.confirmPass.message}
             </FormValidationMessage>
           )
+          : null
         }
       </View>
     );
@@ -251,9 +255,10 @@ class Login extends Component {
           <View>
             {userAction === 'login'
               ? this.renderLoginProperties()
-              : this.renderRegisterProperties()}
+              : this.renderRegisterProperties()
+            }
+            <Button title="SUBMIT" backgroundColor="orange" onPress={this.submit} />
           </View>
-          <Button title="SUBMIT" backgroundColor="orange" onPress={this.submit} />
         </View>
       </ScrollView>
     );
