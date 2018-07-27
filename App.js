@@ -6,14 +6,37 @@
  * @flow
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import { Provider } from 'react-redux';
+import Permissions from 'react-native-permissions';
 
 import store from './src/store/index';
 import Routes from './Routes';
 
-export default () => (
-  <Provider store={store}>
-    <Routes />
-  </Provider>
-);
+export default class App extends Component {
+
+  async componentDidMount () {
+    await this.checkPermission();
+  }
+  
+  checkPermission = async () => {
+    const p = await Permissions.check('microphone');
+    console.log('permission check', p);
+    if (p === 'authorized') return;
+    this.requestPermission();
+  };
+
+  requestPermission = async () => {
+    const p = await Permissions.request('microphone');
+    console.log('permission request', p);
+  };
+
+    render () {
+      return (
+        <Provider store={store}>
+          <Routes />
+        </Provider>
+      )
+    }
+
+}
