@@ -10,7 +10,9 @@ import {
   FormValidationMessage,
   ButtonGroup,
 } from 'react-native-elements';
+import firebase from 'react-native-firebase'
 
+// import { firebase } from '../helpers/firebase';
 import styles from '../styles/styles';
 
 class Login extends Component {
@@ -145,6 +147,10 @@ class Login extends Component {
     });
   };
 
+  loginByGoogle = async () => {
+    let provider = new firebase.auth.GoogleAuthProvider()
+  }
+
   submit = () => {};
 
   renderLoginProperties = () => {
@@ -181,6 +187,7 @@ class Login extends Component {
           leftIcon={{ type: 'material-community', name: 'google-plus' }}
           containerViewStyle={{ marginBottom: 5 }}
           backgroundColor="#03dac6"
+          onPress={this.loginByGoogle}
         />
       </View>
     );
