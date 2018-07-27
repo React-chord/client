@@ -42,7 +42,12 @@ class Login extends Component {
       },
       formRules: {
         email: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
-        password: [/(?=.*[a-z])/, /(?=.*[A-Z])/, /(?=.*[0-9])/, /(?=.{6,})/],
+        password: [
+          { re: /(?=.*[a-z])/, message: 'password must contain lowercase' },
+          { re: /(?=.*[A-Z])/, message: 'password must contain uppercase' },
+          { re: /(?=.*[0-9])/, message: 'password must contain numeric' },
+          { re: /(?=.{6,})/, message: 'password must be at least 6 characters' },
+        ],
       },
     };
   }
@@ -74,14 +79,15 @@ class Login extends Component {
     const { formValidation } = this.state;
     const validation = {
       status: !!val,
-      message: val ? '' : 'Fullname can\'t be empty',
+      message: val ? '' : "Fullname can't be empty",
     };
+    if (!val) validation.message = '';
     const newFormValidation = { ...formValidation };
     newFormValidation.fullname = validation;
     this.setState({
       formValidation: newFormValidation,
     });
-  }
+  };
 
   checkConfirmPass = (val) => {
     const { password, formValidation } = this.state;
@@ -90,12 +96,13 @@ class Login extends Component {
       status,
       message: status ? '' : 'Password do not match',
     };
+    if (!val) validation.message = '';
     const newFormValidation = { ...formValidation };
     newFormValidation.confirmPass = validation;
     this.setState({
       formValidation: newFormValidation,
     });
-  }
+  };
 
   checkEmail = (val) => {
     const { formRules, formValidation } = this.state;
@@ -104,12 +111,33 @@ class Login extends Component {
       status,
       message: status ? '' : 'This is not a valid email address',
     };
+    if (!val) validation.message = '';
     const newFormValidation = { ...formValidation };
     newFormValidation.email = validation;
     this.setState({
       formValidation: newFormValidation,
     });
-  }
+  };
+
+  checkPassword = (val) => {
+    const { formRules, formValidation } = this.state;
+    const validation = {};
+    const rules = formRules.password;
+    for (let i = 0; i < rules.length; i++) {
+      if (!rules[i].re.test(val)) {
+        const { message } = rules[i];
+        validation.message = message;
+        validation.status = false;
+        break;
+      }
+    }
+    if (!val) validation.message = '';
+    const newFormValidation = { ...formValidation };
+    newFormValidation.password = validation;
+    this.setState({
+      formValidation: newFormValidation,
+    });
+  };
 
   changeUserAction = action => () => {
     this.setState({
@@ -130,13 +158,11 @@ class Login extends Component {
           value={email}
           placeholder="E-mail"
         />
-        {formValidation.email.message
-          && (
+        {formValidation.email.message ? (
           <FormValidationMessage>
             {formValidation.email.message}
           </FormValidationMessage>
-          )
-        }
+        ) : null}
         <FormInput
           containerStyle={styles.formTextContainer}
           inputStyle={styles.formTextInput}
@@ -145,6 +171,11 @@ class Login extends Component {
           placeholder="Password"
           secureTextEntry
         />
+        {formValidation.password.message ? (
+          <FormValidationMessage>
+            {formValidation.password.message}
+          </FormValidationMessage>
+        ) : null}
         <Button
           title="Login by Google"
           leftIcon={{ type: 'material-community', name: 'google-plus' }}
@@ -169,13 +200,11 @@ class Login extends Component {
           value={fullname}
           placeholder="Fullname"
         />
-        {formValidation.fullname.message
-          && (
-            <FormValidationMessage>
-              {formValidation.fullname.message}
-            </FormValidationMessage>
-          )
-        }
+        {formValidation.fullname.message ? (
+          <FormValidationMessage>
+            {formValidation.fullname.message}
+          </FormValidationMessage>
+        ) : null}
         <FormInput
           containerStyle={styles.formTextContainer}
           inputStyle={styles.formTextInput}
@@ -183,13 +212,11 @@ class Login extends Component {
           value={email}
           placeholder="E-mail"
         />
-        {formValidation.email.message
-          && (
-            <FormValidationMessage>
-              {formValidation.email.message}
-            </FormValidationMessage>
-          )
-        }
+        {formValidation.email.message ? (
+          <FormValidationMessage>
+            {formValidation.email.message}
+          </FormValidationMessage>
+        ) : null}
         <FormInput
           containerStyle={styles.formTextContainer}
           inputStyle={styles.formTextInput}
@@ -198,6 +225,11 @@ class Login extends Component {
           placeholder="Password"
           secureTextEntry
         />
+        {formValidation.password.message ? (
+          <FormValidationMessage>
+            {formValidation.password.message}
+          </FormValidationMessage>
+        ) : null}
         <FormInput
           containerStyle={styles.formTextContainer}
           inputStyle={styles.formTextInput}
@@ -206,13 +238,11 @@ class Login extends Component {
           placeholder="Confirm Password"
           secureTextEntry
         />
-        {formValidation.confirmPass.message
-          && (
-            <FormValidationMessage>
-              {formValidation.confirmPass.message}
-            </FormValidationMessage>
-          )
-        }
+        {formValidation.confirmPass.message ? (
+          <FormValidationMessage>
+            {formValidation.confirmPass.message}
+          </FormValidationMessage>
+        ) : null}
       </View>
     );
   };
@@ -224,9 +254,8 @@ class Login extends Component {
         flex: 1,
       },
     });
-
     return (
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.container}>
         <View
           style={{
             padding: 10,
@@ -252,8 +281,8 @@ class Login extends Component {
             {userAction === 'login'
               ? this.renderLoginProperties()
               : this.renderRegisterProperties()}
+            <Button title="SUBMIT" backgroundColor="orange" onPress={this.submit} />
           </View>
-          <Button title="SUBMIT" backgroundColor="orange" onPress={this.submit} />
         </View>
       </ScrollView>
     );
