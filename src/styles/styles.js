@@ -32,13 +32,15 @@ const styles = StyleSheet.create({
   },
   formTextInput: {
     color: '#000',
-    fontSize: 20,
+    fontSize: 16,
     borderBottomWidth: 1,
     borderBottomColor: 'orange',
   },
   formTextContainer: {
     backgroundColor: '#fff',
+    opacity: 0.2,
     marginBottom: 5,
+    height: 40,
   },
 });
 
