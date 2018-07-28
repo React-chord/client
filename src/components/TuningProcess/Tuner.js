@@ -11,7 +11,7 @@ export default class Tuner {
   constructor(sampleRate = 22050, bufferSize = 2048) {
     this.sampleRate = sampleRate;
     this.bufferSize = bufferSize;
-    this.pitchFinder = new PitchFinder.YIN({ sampleRate: this.sampleRate });
+    this.pitchFinder = new PitchFinder.YIN({ sampleRate: this.sampleRate, threshold: 0.15 });
   }
 
   start() {
@@ -23,6 +23,7 @@ export default class Tuner {
     });
     Recording.addRecordingEventListener((data) => {
       const frequency = this.pitchFinder(data);
+      console.log('freq', frequency);
       if (frequency && this.onNoteDetected) {
         const note = this.getNote(frequency);
         this.onNoteDetected({
