@@ -30,7 +30,7 @@ const homeStackNavigation = createStackNavigator(
 
 const bottomNavigation = createBottomTabNavigator(
   {
-    Home: homeStackNavigation,
+    Home: { screen: homeStackNavigation },
     Profile: userStackNavigation,
     Tuning: { screen: Tuning },
     Tabs: { screen: Tabs },

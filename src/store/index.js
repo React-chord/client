@@ -4,7 +4,12 @@ import logger from 'redux-logger';
 
 import reducers from './reducers';
 
-const initialState = {};
+const initialState = {
+  user: {
+    fullname: '',
+    email: '',
+  },
+};
 
 const store = createStore(reducers, initialState, applyMiddleware(thunk, logger));
 
