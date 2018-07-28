@@ -14,11 +14,10 @@ import store from './src/store/index';
 import Routes from './Routes';
 
 export default class App extends Component {
-
-  async componentDidMount () {
+  async componentDidMount() {
     await this.checkPermission();
   }
-  
+
   checkPermission = async () => {
     const p = await Permissions.check('microphone');
     console.log('permission check', p);
@@ -31,12 +30,11 @@ export default class App extends Component {
     console.log('permission request', p);
   };
 
-    render () {
-      return (
-        <Provider store={store}>
-          <Routes />
-        </Provider>
-      )
-    }
-
+  render() {
+    return (
+      <Provider store={store}>
+        <Routes />
+      </Provider>
+    );
+  }
 }
