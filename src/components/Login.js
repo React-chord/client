@@ -1,20 +1,40 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, ScrollView, StyleSheet } from 'react-native';
 import {
-  Card,
-  Text,
-  Button,
-  FormInput,
-  FormLabel,
-  FormValidationMessage,
-  ButtonGroup,
+  View,
+  StyleSheet,
+  Keyboard,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  TouchableNativeFeedback,
+} from 'react-native';
+import {
+  Text, Button, FormInput, FormValidationMessage,
 } from 'react-native-elements';
-import firebase from 'react-native-firebase';
 import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
 
-// import { firebase } from '../helpers/firebase';
 import styles from '../styles/styles';
+
+const localStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#22262d',
+    flexDirection: 'column',
+  },
+  formContainer: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    minHeight: 200,
+    padding: 20,
+  },
+  button: {
+    flex: 1,
+  },
+});
+
+const placeholderTextColor = 'rgba(255, 255, 255, 1)';
 
 class Login extends Component {
   constructor() {
@@ -176,6 +196,10 @@ class Login extends Component {
           onChangeText={this.handleChange('email')}
           value={email}
           placeholder="E-mail"
+          placeholderTextColor={placeholderTextColor}
+          keyboardType="email-address"
+          returnKeyType="next"
+          autoCorrect={false}
         />
         {formValidation.email.message ? (
           <FormValidationMessage>
@@ -188,6 +212,7 @@ class Login extends Component {
           onChangeText={this.handleChange('password')}
           value={password}
           placeholder="Password"
+          placeholderTextColor={placeholderTextColor}
           secureTextEntry
         />
         {formValidation.password.message ? (
@@ -195,12 +220,32 @@ class Login extends Component {
             {formValidation.password.message}
           </FormValidationMessage>
         ) : null}
-        <GoogleSigninButton
-          style={{ width: 'auto', height: 48, marginHorizontal: 12 }}
-          size={GoogleSigninButton.Size.Standard}
-          color={GoogleSigninButton.Color.Dark}
-          onPress={this.loginByGoogle}
-        />
+        <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+          <GoogleSigninButton
+            style={{ width: 48, height: 48, marginLeft: 10 }}
+            size={GoogleSigninButton.Size.Icon}
+            color={GoogleSigninButton.Color.Dark}
+          />
+          <TouchableNativeFeedback onPress={this.loginByGoogle}>
+            <View
+              style={{
+                flex: 1,
+                marginLeft: 0,
+                height: 40,
+                backgroundColor: 'blue',
+                marginTop: 4,
+                marginRight: 15,
+              }}
+            >
+              <Text style={{
+                textAlign: 'center', lineHeight: 40, color: 'white', fontSize: 16,
+              }}
+              >
+                Sign in by Google
+              </Text>
+            </View>
+          </TouchableNativeFeedback>
+        </View>
       </View>
     );
   };
@@ -218,6 +263,7 @@ class Login extends Component {
           onChangeText={this.handleChange('fullname')}
           value={fullname}
           placeholder="Fullname"
+          placeholderTextColor={placeholderTextColor}
         />
         {formValidation.fullname.message ? (
           <FormValidationMessage>
@@ -230,6 +276,8 @@ class Login extends Component {
           onChangeText={this.handleChange('email')}
           value={email}
           placeholder="E-mail"
+          placeholderTextColor={placeholderTextColor}
+          keyboardType="email-address"
         />
         {formValidation.email.message ? (
           <FormValidationMessage>
@@ -242,6 +290,7 @@ class Login extends Component {
           onChangeText={this.handleChange('password')}
           value={password}
           placeholder="Password"
+          placeholderTextColor={placeholderTextColor}
           secureTextEntry
         />
         {formValidation.password.message ? (
@@ -255,6 +304,7 @@ class Login extends Component {
           onChangeText={this.handleChange('confirmPass')}
           value={confirmPass}
           placeholder="Confirm Password"
+          placeholderTextColor={placeholderTextColor}
           secureTextEntry
         />
         {formValidation.confirmPass.message ? (
@@ -268,42 +318,37 @@ class Login extends Component {
 
   render() {
     const { userAction } = this.state;
-    const localStyles = StyleSheet.create({
-      button: {
-        flex: 1,
-      },
-    });
+
     return (
-      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.container}>
-        <View
-          style={{
-            padding: 10,
-            backgroundColor: '#000',
-            flexWrap: 'wrap',
-          }}
-        >
-          <View style={{ flexDirection: 'row' }}>
-            <Button
-              containerViewStyle={localStyles.button}
-              title="LOGIN"
-              backgroundColor={userAction !== 'login' ? 'black' : ''}
-              onPress={this.changeUserAction('login')}
-            />
-            <Button
-              containerViewStyle={localStyles.button}
-              title="REGISTER"
-              backgroundColor={userAction === 'login' ? 'black' : ''}
-              onPress={this.changeUserAction('register')}
-            />
-          </View>
-          <View className="form" style={{ flexWrap: 'wrap' }}>
-            {userAction === 'login'
-              ? this.renderLoginProperties()
-              : this.renderRegisterProperties()}
-            <Button title="SUBMIT" backgroundColor="orange" onPress={this.submit} />
-          </View>
-        </View>
-      </ScrollView>
+      <View style={localStyles.container}>
+        {/* <StatusBar barStyle="light-content" /> */}
+        <KeyboardAvoidingView behavior="padding" style={localStyles.container}>
+          <TouchableWithoutFeedback style={localStyles.container} onPress={Keyboard.dismiss}>
+            <View style={localStyles.formContainer}>
+              <View style={{ flexDirection: 'row' }}>
+                <Button
+                  containerViewStyle={localStyles.button}
+                  title="LOGIN"
+                  backgroundColor={userAction !== 'login' ? 'black' : ''}
+                  onPress={this.changeUserAction('login')}
+                />
+                <Button
+                  containerViewStyle={localStyles.button}
+                  title="REGISTER"
+                  backgroundColor={userAction === 'login' ? 'black' : ''}
+                  onPress={this.changeUserAction('register')}
+                />
+              </View>
+              <View className="form">
+                {userAction === 'login'
+                  ? this.renderLoginProperties()
+                  : this.renderRegisterProperties()}
+                <Button title="SUBMIT" backgroundColor="orange" onPress={this.submit} />
+              </View>
+            </View>
+          </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
+      </View>
     );
   }
 }

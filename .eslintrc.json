@@ -8,7 +8,11 @@
     "react/prop-types": 0,
     "no-console": "off",
     "no-plusplus": "off",
+<<<<<<< 1656fe0b52b991ab8bf84dfb192f499d6b57eaaf
     "no-underscore-dangle": "off",
     "no-use-before-define": "off"
+=======
+    "no-underscore-dangle": "off"
+>>>>>>> still work in progress
   }
 }
