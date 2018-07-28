@@ -1,20 +1,27 @@
-import React, {PureComponent} from 'react'
+import React, { PureComponent } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   Platform,
-} from 'react-native'
+} from 'react-native';
 
 export default class Note extends PureComponent {
   render() {
+    const { name, octave } = this.props;
     return (
       <View style={style.note}>
-        <Text style={style.name}>{this.props.name[0]}</Text>
-        <Text style={style.octave}>{this.props.octave}</Text>
-        <Text style={style.sharp}>{this.props.name[1]}</Text>
+        <Text style={style.name}>
+          {name[0]}
+        </Text>
+        <Text style={style.octave}>
+          {octave}
+        </Text>
+        <Text style={style.sharp}>
+          {name[1]}
+        </Text>
       </View>
-    )
+    );
   }
 }
 
@@ -41,7 +48,7 @@ const style = StyleSheet.create({
         top: 10,
         fontSize: 48,
       },
-    })
+    }),
   },
   octave: {
     fontSize: 32,
@@ -50,4 +57,4 @@ const style = StyleSheet.create({
     right: 0,
     bottom: 0,
   },
-})
+});

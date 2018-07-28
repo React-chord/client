@@ -9,11 +9,12 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import Permissions from 'react-native-permissions';
+import { connect } from 'react-redux';
 
 import store from './src/store/index';
 import Routes from './Routes';
 
-export default class App extends Component {
+class App extends Component {
   async componentDidMount() {
     await this.checkPermission();
   }
@@ -38,3 +39,5 @@ export default class App extends Component {
     );
   }
 }
+
+export default connect(null, null)(App);
