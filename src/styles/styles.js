@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: 'normal',
-
   },
   formTextInput: {
     color: '#000',
@@ -41,6 +40,10 @@ const styles = StyleSheet.create({
     opacity: 0.2,
     marginBottom: 5,
     height: 40,
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover',
   },
 });
 
