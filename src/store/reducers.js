@@ -26,6 +26,16 @@ const chordReducers = (state = initiateState, action) => {
 
       return newState
 
+    case 'IS_LOADING':
+      return {
+        ...state,
+        isLoading: action.payload,
+      };
+    case 'SET_USER':
+      return {
+        ...state,
+        user: { ...action.payload },
+      };
     default:
       return state;
   }
