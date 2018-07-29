@@ -9,6 +9,8 @@ const initialState = {
     fullname: '',
     email: '',
   },
+  isLoading: false,
+  allChords: []
 };
 
 const store = createStore(reducers, initialState, applyMiddleware(thunk, logger));

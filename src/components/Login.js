@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
@@ -438,3 +439,5 @@ export default connect(
   null,
   mapDispatchToProps,
 )(Login);
+=======
+>>>>>>> chord practice feature

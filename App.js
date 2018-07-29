@@ -7,13 +7,19 @@
  */
 
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import Permissions from 'react-native-permissions';
 import { connect } from 'react-redux';
 import { AsyncStorage } from 'react-native';
+=======
+import { Provider } from 'react-redux';
+import Permissions from 'react-native-permissions'
+>>>>>>> chord practice feature
 
 import { fetchUserInfo } from './src/store/actions';
 import Routes from './Routes';
 
+<<<<<<< HEAD
 class App extends Component {
   async componentDidMount() {
     await this.checkPermission();
@@ -46,6 +52,12 @@ class App extends Component {
     } catch (error) {
       console.log(error);
     }
+=======
+export default class App extends Component {
+
+  async componentDidMount() {
+    await this.checkPermission();
+>>>>>>> chord practice feature
   }
 
   checkPermission = async () => {
@@ -62,6 +74,7 @@ class App extends Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <Routes />
     );
   }
@@ -72,3 +85,12 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(null, mapDispatchToProps)(App);
+=======
+      <Provider store={store}>
+        <Routes />
+      </Provider>    
+    )
+  }
+}
+
+>>>>>>> chord practice feature

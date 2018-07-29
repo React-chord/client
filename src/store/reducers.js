@@ -1,8 +1,4 @@
-const initiateState = []
-
-const chordReducers = (state = initiateState, action) => {
-  let newState
-
+const chordReducers = (state, action) => {
   switch (action.type) {
     case 'SET_SCALES':
       newState = state.slice()
@@ -36,6 +32,12 @@ const chordReducers = (state = initiateState, action) => {
         ...state,
         user: { ...action.payload },
       };
+    case 'GET_CHORDS' :
+      let newArr = [...action.payload.map(el => el = {...el})]
+      return {
+        ...state,
+        allChords: newArr
+      }
     default:
       return state;
   }
