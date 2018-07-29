@@ -12,6 +12,9 @@
     "no-underscore-dangle": "off",
     "no-use-before-define": "off",
     "radix":"off",
-    "no-restricted-properties":"off"
+    "no-restricted-properties":"off",
+    "no-case-declarations":"off",
+    "no-return-assign":"off",
+    "no-param-reassign":"off"
   }
 }
