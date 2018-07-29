@@ -4,6 +4,20 @@ import { AsyncStorage } from 'react-native';
 
 const baseURL = 'https://api-chords.ridozaen.com';
 
+const setScales = (scales) => {
+    return {
+        type: 'SET_SCALES',
+        payload: scales
+    }
+}
+
+const setTuning = (note) => {
+  return {
+    type: 'SET_TUNING',
+    payload: note
+  }
+}
+
 const actionIsLoading = bool => ({
   type: 'IS_LOADING',
   payload: bool,
@@ -55,5 +69,5 @@ const userRegister = user => async () => {
 };
 
 export {
-  actionIsLoading, fetchUserInfo, userLogin, userRegister,
+  actionIsLoading, fetchUserInfo, userLogin, userRegister, setTuning, setScales
 };
