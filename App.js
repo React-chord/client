@@ -36,6 +36,18 @@ class App extends Component {
     }
   }
 
+  checkAsyncStorage = async () => {
+    const { fetchUser } = this.props;
+    try {
+      const token = await AsyncStorage.getItem('token');
+      if (token) {
+        fetchUser(token);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   checkPermission = async () => {
     const p = await Permissions.check('microphone');
     console.log('permission check', p);
