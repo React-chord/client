@@ -1,10 +1,13 @@
-const actionIsLoading = (bool) => {
+export const setScales = (scales) => {
     return {
-        type: 'IS_LOADING',
-        payload: bool
+        type: 'SET_SCALES',
+        payload: scales
     }
 }
 
-export {
-    actionIsLoading
+export const setTuning = (note) => {
+  return {
+    type: 'SET_TUNING',
+    payload: note
+  }
 }
