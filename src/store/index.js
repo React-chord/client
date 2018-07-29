@@ -10,7 +10,7 @@ const initialState = {
     email: '',
   },
   isLoading: false,
-  allChords: []
+  allChords: [],
 };
 
 const store = createStore(reducers, initialState, applyMiddleware(thunk, logger));

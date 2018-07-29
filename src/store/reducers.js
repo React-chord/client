@@ -10,7 +10,9 @@ const chordReducers = (state, action) => {
 
     case 'SET_TUNING':
       newState = state.slice();
-      const filterState = element => element.name === action.payload.name && element.octave === action.payload.octave;
+      const filterState = element => (
+        element.name === action.payload.name && element.octave === action.payload.octave
+      );
       const index = newState.findIndex(filterState);
 
       if (index !== -1) newState[index].hitted = true;
@@ -33,12 +35,12 @@ const chordReducers = (state, action) => {
         ...state,
         user: { ...action.payload },
       };
-    case 'GET_CHORDS' :
-      let newArr = [...action.payload.map(el => el = {...el})]
+    case 'GET_CHORDS':
+      const newArr = [...action.payload.map(el => el = { ...el })];
       return {
         ...state,
-        allChords: newArr
-      }
+        allChords: newArr,
+      };
     default:
       return state;
   }
