@@ -1,22 +1,17 @@
 import axios from 'axios';
 import { AsyncStorage } from 'react-native';
 
-
 const baseURL = 'https://api-chords.ridozaen.com';
 
-const setScales = (scales) => {
-    return {
-        type: 'SET_SCALES',
-        payload: scales
-    }
-}
+const setScales = scales => ({
+  type: 'SET_SCALES',
+  payload: scales,
+});
 
-const setTuning = (note) => {
-  return {
-    type: 'SET_TUNING',
-    payload: note
-  }
-}
+const setTuning = note => ({
+  type: 'SET_TUNING',
+  payload: note,
+});
 
 const actionIsLoading = bool => ({
   type: 'IS_LOADING',
@@ -31,7 +26,9 @@ const setUser = userDetail => ({
 const fetchUserInfo = token => async (dispatch) => {
   console.log('action fetch info token', token);
   try {
-    const { data } = await axios.get(`${baseURL}/users/status`, { headers: { authorization: token } });
+    const { data } = await axios.get(`${baseURL}/users/status`, {
+      headers: { authorization: token },
+    });
     console.log('axios get user status');
     console.log(data);
     dispatch(setUser(data.user));
@@ -106,5 +103,5 @@ const setChords = (chords) => {
 }
 
 export {
-    actionIsLoading, fetchUserInfo, userLogin, userRegister, setTuning, setScales, generateChords
-  };
+  actionIsLoading, fetchUserInfo, userLogin, userRegister, setTuning, setScales, generateChords
+};

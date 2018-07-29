@@ -20,11 +20,11 @@ export default class Tuner {
       sampleRate: 44100,
       bitsPerChannel: 50,
       channelsPerFrame: 1,
-    })
-    Recording.addRecordingEventListener(data => {
-      const frequency = this.pitchFinder(data)
+    });
+    Recording.addRecordingEventListener((data) => {
+      const frequency = this.pitchFinder(data);
       if (frequency && this.onNoteDetected) {
-        const note = this.getNote(frequency)
+        const note = this.getNote(frequency);
         this.onNoteDetected({
           name: this.noteStrings[note % 12],
           value: note,
@@ -35,6 +35,10 @@ export default class Tuner {
       }
     });
     Recording.start();
+  }
+
+  stop() {
+    Recording.stop();
   }
 
   /**

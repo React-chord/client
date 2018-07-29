@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Text, View, TouchableOpacity,
-} from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
 import styles from '../styles/styles';
@@ -9,7 +7,7 @@ import { generateChords } from '../store/actions';
 
 class Home extends Component {
   state = {
-    navigations: ['Quiz'],
+    navigations: ['Quiz', 'Scale'],
   };
 
   navigateTo = destination => () => {
