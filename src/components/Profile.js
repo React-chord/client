@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  View, Text, StyleSheet, StatusBar,
+  View, Text, StyleSheet, StatusBar, AsyncStorage,
 } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -12,13 +12,27 @@ class Profile extends Component {
   componentDidMount = async () => {
     // TODO : uncomment when done
     const { navigation, user } = this.props;
+    const token = await AsyncStorage.getItem('token');
+
     console.log('====================================');
-    console.log('will receive prop');
+    console.log('will did mount');
     console.log(this.props);
+    console.log('token');
+    console.log(token);
     console.log('====================================');
     if (!user.fullname) {
       navigation.navigate('Login');
     }
+  }
+
+  componentWillReceiveProps = async (nextProps) => {
+    const token = await AsyncStorage.getItem('token');
+    console.log('====================================');
+    console.log('will receive prop');
+    console.log(nextProps);
+    console.log('token');
+    console.log(token);
+    console.log('====================================');
   }
 
   render() {

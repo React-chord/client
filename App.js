@@ -24,6 +24,10 @@ class App extends Component {
     const { fetchUser } = this.props;
     try {
       const token = await AsyncStorage.getItem('token');
+      console.log('====================================');
+      console.log('apakah ada token');
+      console.log(token);
+      console.log('====================================');
       if (token) {
         fetchUser(token);
       }

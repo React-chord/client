@@ -7,6 +7,7 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   TouchableNativeFeedback,
+  AsyncStorage,
 } from 'react-native';
 import {
   Text, Button, FormInput, FormValidationMessage,
@@ -198,7 +199,9 @@ class Login extends Component {
 
     try {
       if (formValidation.email && formValidation.password) {
-        await login({ email, password });
+        const result = await login({ email, password });
+        console.log('login result', result);
+        await AsyncStorage.setItem('token', result.token);
         navigation.navigate('Profile');
       } else {
         await this.setState({
