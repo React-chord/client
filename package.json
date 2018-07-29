@@ -8,10 +8,12 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "bluebird": "^3.5.1",
     "firebase": "5.3.0",
     "pitchfinder": "2.0.9",
     "react": "16.4.1",
     "react-native": "0.56.0",
+    "react-native-action-button": "^2.8.4",
     "react-native-elements": "0.19.1",
     "react-native-firebase": "4.3.8",
     "react-native-google-signin": "0.12.0",

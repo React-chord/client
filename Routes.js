@@ -12,7 +12,7 @@ const userStackNavigation = createStackNavigator(
     Profile: { screen: Profile },
     Login: { screen: Login },
     Tuning: { screen: Tuning },
-    Scale: { screen: Scale }
+    Scale: { screen: Scale },
   },
   {
     initialRouteName: 'Profile',
