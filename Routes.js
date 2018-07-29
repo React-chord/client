@@ -11,12 +11,9 @@ const userStackNavigation = createStackNavigator(
   {
     Profile: { screen: Profile },
     Login: { screen: Login },
-    Tuning: { screen: Tuning },
-    Scale: { screen: Scale },
   },
   {
     initialRouteName: 'Profile',
-    headerMode: 'none',
   },
 );
 
@@ -24,10 +21,10 @@ const homeStackNavigation = createStackNavigator(
   {
     Home: { screen: Home },
     Quiz: { screen: Tabs },
+    Scale: { screen: Scale },
   },
   {
     initialRouteName: 'Home',
-    headerMode: 'none',
   },
 );
 
@@ -36,7 +33,6 @@ const bottomNavigation = createBottomTabNavigator(
     Home: { screen: homeStackNavigation },
     Profile: userStackNavigation,
     Tuning: { screen: Tuning },
-    Tabs: { screen: Tabs },
   },
   {
     initialRouteName: 'Home',
