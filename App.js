@@ -17,6 +17,7 @@ import Routes from './Routes';
 class App extends Component {
   async componentDidMount() {
     await this.checkPermission();
+    await this.checkAsyncStorage();
   }
 
   checkAsyncStorage = async () => {

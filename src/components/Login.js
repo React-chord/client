@@ -14,6 +14,7 @@ import {
 import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
 
 import styles from '../styles/styles';
+import { userLogin, userRegister } from '../store/actions';
 
 const localStyles = StyleSheet.create({
   container: {
@@ -35,15 +36,17 @@ const localStyles = StyleSheet.create({
 });
 
 const placeholderTextColor = 'rgba(255, 255, 255, 1)';
-
+const initialFormState = {
+  password: '',
+  email: '',
+  fullname: '',
+  confirmPass: '',
+};
 class Login extends Component {
   constructor() {
     super();
     this.state = {
-      password: '',
-      email: '',
-      fullname: '',
-      confirmPass: '',
+      ...initialFormState,
       userAction: 'login',
       formValidation: {
         fullname: {
@@ -72,7 +75,12 @@ class Login extends Component {
           { re: /(?=.{6,})/, message: 'password must be at least 6 characters' },
         ],
       },
+      warnForm: false,
     };
+  }
+
+  componentWillUpdate() {
+    clearTimeout(this._timeout);
   }
 
   handleChange = name => (val) => {
@@ -184,7 +192,59 @@ class Login extends Component {
     }
   };
 
-  submit = () => {};
+  login = async () => {
+    const { email, password, formValidation } = this.state;
+    const { login, navigation } = this.props;
+
+    try {
+      if (formValidation.email && formValidation.password) {
+        await login({ email, password });
+        navigation.navigate('Profile');
+      } else {
+        await this.setState({
+          ...initialFormState, warnForm: true,
+        });
+        this._timeout = setTimeout(() => {
+          this.setState({ warnForm: false });
+        }, 2000);
+      }
+    } catch (error) {
+      console.log(error.data);
+    }
+  };
+
+  register = async () => {
+    const {
+      email, password, fullname, formValidation,
+    } = this.state;
+    const { register } = this.props;
+
+    const isValid = !!Object.keys(formValidation)
+      .filter(key => formValidation[key].status === true)[0];
+
+    try {
+      if (isValid) {
+        await register({ email, password, fullname });
+        await this.setState({ userAction: 'login', ...initialFormState });
+      } else {
+        await this.setState({ ...initialFormState, warnForm: true });
+        this._timeout = setTimeout(() => {
+          this.setState({ warnForm: false });
+        }, 2000);
+      }
+    } catch (error) {
+      console.log('di catch', error);
+    }
+  }
+
+  submit = () => {
+    const { userAction } = this.state;
+    if (userAction === 'login') {
+      this.login();
+    } else {
+      this.register();
+    }
+  };
 
   renderLoginProperties = () => {
     const { password, email, formValidation } = this.state;
@@ -237,9 +297,13 @@ class Login extends Component {
                 marginRight: 15,
               }}
             >
-              <Text style={{
-                textAlign: 'center', lineHeight: 40, color: 'white', fontSize: 16,
-              }}
+              <Text
+                style={{
+                  textAlign: 'center',
+                  lineHeight: 40,
+                  color: 'white',
+                  fontSize: 16,
+                }}
               >
                 Sign in by Google
               </Text>
@@ -317,7 +381,7 @@ class Login extends Component {
   };
 
   render() {
-    const { userAction } = this.state;
+    const { userAction, warnForm } = this.state;
 
     return (
       <View style={localStyles.container}>
@@ -342,7 +406,16 @@ class Login extends Component {
               <View className="form">
                 {userAction === 'login'
                   ? this.renderLoginProperties()
-                  : this.renderRegisterProperties()}
+                  : this.renderRegisterProperties()
+                }
+                {warnForm
+                  ? (
+                    <FormValidationMessage>
+                      Please check your input
+                    </FormValidationMessage>
+                  )
+                  : null
+                }
                 <Button title="SUBMIT" backgroundColor="orange" onPress={this.submit} />
               </View>
             </View>
@@ -353,7 +426,12 @@ class Login extends Component {
   }
 }
 
+const mapDispatchToProps = dispatch => ({
+  login: user => dispatch(userLogin(user)),
+  register: user => dispatch(userRegister(user)),
+});
+
 export default connect(
   null,
-  null,
+  mapDispatchToProps,
 )(Login);
