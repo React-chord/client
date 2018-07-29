@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
 import styles from '../styles/styles';
+import { generateChords } from '../store/actions';
 
 class Home extends Component {
   state = {
@@ -13,6 +14,10 @@ class Home extends Component {
     const { navigation } = this.props;
     navigation.navigate(destination);
   };
+
+  componentDidMount(){
+    this.props.getChords()
+  }
 
   render() {
     const { navigations } = this.state;
@@ -39,7 +44,10 @@ class Home extends Component {
   }
 }
 
-export default connect(
-  null,
-  null,
-)(Home);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getChords: () => dispatch(generateChords())
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Home);

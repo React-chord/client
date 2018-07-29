@@ -6,6 +6,7 @@ import Tuning from './src/components/Tuning';
 import Scale from './src/components/Scale';
 import Tabs from './src/components/Tabs';
 import Profile from './src/components/Profile';
+import ChordPractice from './src/components/ChordPractice'
 
 const userStackNavigation = createStackNavigator(
   {
@@ -33,6 +34,7 @@ const bottomNavigation = createBottomTabNavigator(
     Home: { screen: homeStackNavigation },
     Profile: userStackNavigation,
     Tuning: { screen: Tuning },
+    ChordPractice: { screen: ChordPractice },
   },
   {
     initialRouteName: 'Home',

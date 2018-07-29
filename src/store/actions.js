@@ -65,6 +65,43 @@ const userRegister = user => async () => {
   }
 };
 
+const generateChords = () => {
+    return (dispatch) => {
+        axios.get('https://api-chords.ridozaen.com/chords')
+        .then(res => {
+            let chords = []
+            res.data.chords.forEach(chord => {
+                if (chord.chord === 'C'){
+                    chords.push(chord)
+                } else if (chord.chord === 'D') {
+                    chords.push(chord)
+                } else if (chord.chord === 'E') {
+                    chords.push(chord)
+                } else if (chord.chord === 'F') {
+                    chords.push(chord)
+                } else if (chord.chord === 'G') {
+                    chords.push(chord)
+                } else if (chord.chord === 'A') {
+                    chords.push(chord)
+                } else if (chord.chord === 'B') {
+                    chords.push(chord)
+                }
+            })
+            dispatch(setChords(chords))
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+}
+
+const setChords = (chords) => {
+    return {
+        type: 'GET_CHORDS',
+        payload: chords
+    }
+}
+
 export {
-  actionIsLoading, fetchUserInfo, userLogin, userRegister, setTuning, setScales,
+  actionIsLoading, fetchUserInfo, userLogin, userRegister, setTuning, setScales, generateChords
 };

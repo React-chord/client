@@ -33,6 +33,12 @@ const chordReducers = (state, action) => {
         ...state,
         user: { ...action.payload },
       };
+    case 'GET_CHORDS' :
+      let newArr = [...action.payload.map(el => el = {...el})]
+      return {
+        ...state,
+        allChords: newArr
+      }
     default:
       return state;
   }
