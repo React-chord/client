@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
 import {
   Text, View, TouchableOpacity,
 } from 'react-native';
-=======
-import { Text, View } from 'react-native';
->>>>>>> chord practice feature
 import { connect } from 'react-redux';
 
 import styles from '../styles/styles';
 import { generateChords } from '../store/actions';
 
 class Home extends Component {
-<<<<<<< HEAD
   state = {
     navigations: ['Quiz'],
   };
@@ -21,6 +16,10 @@ class Home extends Component {
     const { navigation } = this.props;
     navigation.navigate(destination);
   };
+
+  componentDidMount(){
+    this.props.getChords()
+  }
 
   render() {
     const { navigations } = this.state;
@@ -47,30 +46,6 @@ class Home extends Component {
   }
 }
 
-export default connect(
-  null,
-  null,
-)(Home);
-=======
-
-  componentDidMount(){
-    this.props.getChords()
-  }
-
-  render () {
-    return (
-    <View style={styles.container}>
-      <Text style={styles.welcome}>
-          Welcome to React Native!
-      </Text>
-      <Text style={styles.instructions}>
-          To get started, edit App.js
-      </Text>
-    </View>
-    )
-  }
-}
-
 const mapDispatchToProps = (dispatch) => {
   return {
     getChords: () => dispatch(generateChords())
@@ -78,4 +53,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(null, mapDispatchToProps)(Home);
->>>>>>> chord practice feature

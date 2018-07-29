@@ -55,14 +55,12 @@
 		941B14AD79574A8EA7E45E06 /* libRCTOrientation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA47EFD4D23849CE9A212C5A /* libRCTOrientation.a */; };
 		AA44D05291A04DB1813002F3 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 51FEF4F68ACB4478AEE5D1A4 /* Entypo.ttf */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
-<<<<<<< HEAD
 		6817D59D64A0497B84CDE928 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60AC2CAAC5DC4D8C8A7D6157 /* libReactNativePermissions.a */; };
 		52BFB9FD3B984F69A409BAD9 /* libRecording.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 415C8F9D61A249898E918B13 /* libRecording.a */; };
 		AEA92911181D49238946F672 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF2F43DA316344E4AF31DA05 /* SystemConfiguration.framework */; };
 		B3D2BB20A795484E987B098E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9459F89996454E10B76E3D92 /* libz.tbd */; };
 		CFA5A6B3E85F4D0EAA81381E /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2161462C8DD643F99D067389 /* libReactNativePermissions.a */; };
 		FA53A4C29144483AA328E65F /* libRecording.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38F37D9ABCED431292A14345 /* libRecording.a */; };
-=======
 		EC7E2108583D4FD499B477E9 /* libReactNativePermissions.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 718DD115D3EF4147AD997465 /* libReactNativePermissions.a */; };
 		C0034A230D1B4C80A7BBABA4 /* libRecording.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CA30B7F02234B298A998D17 /* libRecording.a */; };
 		2CE57C5B74684429AB4D366A /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BFD50D1316740EDB7B7360D /* libRNVectorIcons.a */; };
@@ -77,7 +75,6 @@
 		23941FCE2DE445F3AA2AA221 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B49590AC0BDC44AC8111C801 /* Octicons.ttf */; };
 		EF70E7F7AE5D46309E06F15E /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9945F534C58F4194AC0D51AA /* SimpleLineIcons.ttf */; };
 		8AD6255BC4734F99A083B158 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C656585EB0F942799AEB073B /* Zocial.ttf */; };
->>>>>>> chord practice feature
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -464,7 +461,6 @@
 		9C0825F6DFD643C3B1900534 /* ReactNativePermissions.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativePermissions.xcodeproj; path = "../node_modules/react-native-permissions/ios/ReactNativePermissions.xcodeproj"; sourceTree = "<group>"; };
 		9C3EC055C31F4C84821324C4 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
-<<<<<<< HEAD
 		0BE76BA155714CDF8938074F /* ReactNativePermissions.xcodeproj */ = {isa = PBXFileReference; name = "ReactNativePermissions.xcodeproj"; path = "../node_modules/react-native-permissions/ios/ReactNativePermissions.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		60AC2CAAC5DC4D8C8A7D6157 /* libReactNativePermissions.a */ = {isa = PBXFileReference; name = "libReactNativePermissions.a"; path = "libReactNativePermissions.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		39623D6598554616BE4AD986 /* Recording.xcodeproj */ = {isa = PBXFileReference; name = "Recording.xcodeproj"; path = "../node_modules/react-native-recording/lib/ios/Recording.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
@@ -475,7 +471,6 @@
 		EF2F43DA316344E4AF31DA05 /* SystemConfiguration.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F4C231806A664752B392353B /* RNGoogleSignin.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGoogleSignin.xcodeproj; path = "../node_modules/react-native-google-signin/ios/RNGoogleSignin.xcodeproj"; sourceTree = "<group>"; };
 		F7BBE390DF7548CDAE2F7EB7 /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
-=======
 		6F50207BF4E7442BA3E9590F /* ReactNativePermissions.xcodeproj */ = {isa = PBXFileReference; name = "ReactNativePermissions.xcodeproj"; path = "../node_modules/react-native-permissions/ios/ReactNativePermissions.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		718DD115D3EF4147AD997465 /* libReactNativePermissions.a */ = {isa = PBXFileReference; name = "libReactNativePermissions.a"; path = "libReactNativePermissions.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		EC93A15964774C47AB979D34 /* Recording.xcodeproj */ = {isa = PBXFileReference; name = "Recording.xcodeproj"; path = "../node_modules/react-native-recording/lib/ios/Recording.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
@@ -493,7 +488,6 @@
 		B49590AC0BDC44AC8111C801 /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		9945F534C58F4194AC0D51AA /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		C656585EB0F942799AEB073B /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
->>>>>>> chord practice feature
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -522,7 +516,6 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
-<<<<<<< HEAD
 				6817D59D64A0497B84CDE928 /* libReactNativePermissions.a in Frameworks */,
 				52BFB9FD3B984F69A409BAD9 /* libRecording.a in Frameworks */,
 				CFA5A6B3E85F4D0EAA81381E /* libReactNativePermissions.a in Frameworks */,
@@ -535,11 +528,9 @@
 				AEA92911181D49238946F672 /* SystemConfiguration.framework in Frameworks */,
 				89B8C368F3194D0899E3EB89 /* AddressBook.framework in Frameworks */,
 				941B14AD79574A8EA7E45E06 /* libRCTOrientation.a in Frameworks */,
-=======
 				EC7E2108583D4FD499B477E9 /* libReactNativePermissions.a in Frameworks */,
 				C0034A230D1B4C80A7BBABA4 /* libRecording.a in Frameworks */,
 				2CE57C5B74684429AB4D366A /* libRNVectorIcons.a in Frameworks */,
->>>>>>> chord practice feature
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -748,7 +739,6 @@
 				832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */,
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
-<<<<<<< HEAD
 				0BE76BA155714CDF8938074F /* ReactNativePermissions.xcodeproj */,
 				39623D6598554616BE4AD986 /* Recording.xcodeproj */,
 				9C0825F6DFD643C3B1900534 /* ReactNativePermissions.xcodeproj */,
@@ -757,11 +747,9 @@
 				F7BBE390DF7548CDAE2F7EB7 /* RNFirebase.xcodeproj */,
 				F4C231806A664752B392353B /* RNGoogleSignin.xcodeproj */,
 				C81E8A32A47143A7B35EEC84 /* RCTOrientation.xcodeproj */,
-=======
 				6F50207BF4E7442BA3E9590F /* ReactNativePermissions.xcodeproj */,
 				EC93A15964774C47AB979D34 /* Recording.xcodeproj */,
 				95D64174B3464C30AFD81A55 /* RNVectorIcons.xcodeproj */,
->>>>>>> chord practice feature
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -783,12 +771,9 @@
 				00E356EF1AD99517003FC87E /* chordClientTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
-<<<<<<< HEAD
 				578472BBA62C408087DC5AD3 /* Resources */,
 				E3DE81FA210AF1FB001679C2 /* Recovered References */,
-=======
 				11F1EB1FBFA04E6082FD8160 /* Resources */,
->>>>>>> chord practice feature
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -815,7 +800,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-<<<<<<< HEAD
 		E3DE81FA210AF1FB001679C2 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -894,7 +878,6 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
-=======
 		11F1EB1FBFA04E6082FD8160 /* Resources */ = {
 			isa = "PBXGroup";
 			children = (
@@ -913,7 +896,6 @@
 			name = Resources;
 			sourceTree = "<group>";
 			path = "";
->>>>>>> chord practice feature
 		};
 /* End PBXGroup section */
 
@@ -1449,7 +1431,6 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-<<<<<<< HEAD
 				AA44D05291A04DB1813002F3 /* Entypo.ttf in Resources */,
 				871E07233CAD47EA81162EAA /* EvilIcons.ttf in Resources */,
 				70D466AEFE2E4205A7826C83 /* Feather.ttf in Resources */,
@@ -1460,7 +1441,6 @@
 				90F053474F5348069B66EAA1 /* Octicons.ttf in Resources */,
 				1209EB8062CA4A979F7ADCFA /* SimpleLineIcons.ttf in Resources */,
 				30C123A6F03F4A459CC13212 /* Zocial.ttf in Resources */,
-=======
 				62FB5F0E0633440DB086D945 /* Entypo.ttf in Resources */,
 				F7DDE0CF12AF4C518CE3843E /* EvilIcons.ttf in Resources */,
 				152351D2E71A479BA970C4B4 /* Feather.ttf in Resources */,
@@ -1472,7 +1452,6 @@
 				23941FCE2DE445F3AA2AA221 /* Octicons.ttf in Resources */,
 				EF70E7F7AE5D46309E06F15E /* SimpleLineIcons.ttf in Resources */,
 				8AD6255BC4734F99A083B158 /* Zocial.ttf in Resources */,
->>>>>>> chord practice feature
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1621,19 +1600,13 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-<<<<<<< HEAD
-=======
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
->>>>>>> chord practice feature
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-recording/lib/ios",
-<<<<<<< HEAD
-=======
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
->>>>>>> chord practice feature
 				);
 			};
 			name = Debug;
@@ -1669,19 +1642,13 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-<<<<<<< HEAD
-=======
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
->>>>>>> chord practice feature
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-recording/lib/ios",
-<<<<<<< HEAD
-=======
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
->>>>>>> chord practice feature
 				);
 			};
 			name = Release;
@@ -1714,10 +1681,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-recording/lib/ios",
-<<<<<<< HEAD
-=======
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
->>>>>>> chord practice feature
 				);
 			};
 			name = Debug;
@@ -1749,10 +1713,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-recording/lib/ios",
-<<<<<<< HEAD
-=======
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
->>>>>>> chord practice feature
 				);
 			};
 			name = Release;
@@ -1802,19 +1763,13 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-<<<<<<< HEAD
-=======
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
->>>>>>> chord practice feature
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-recording/lib/ios",
-<<<<<<< HEAD
-=======
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
->>>>>>> chord practice feature
 				);
 			};
 			name = Debug;
@@ -1864,19 +1819,13 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-<<<<<<< HEAD
-=======
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
->>>>>>> chord practice feature
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-recording/lib/ios",
-<<<<<<< HEAD
-=======
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
->>>>>>> chord practice feature
 				);
 			};
 			name = Release;
@@ -1925,19 +1874,13 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-<<<<<<< HEAD
-=======
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
->>>>>>> chord practice feature
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-recording/lib/ios",
-<<<<<<< HEAD
-=======
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
->>>>>>> chord practice feature
 				);
 			};
 			name = Debug;
@@ -1986,19 +1929,13 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-<<<<<<< HEAD
-=======
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
->>>>>>> chord practice feature
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-permissions/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-recording/lib/ios",
-<<<<<<< HEAD
-=======
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
->>>>>>> chord practice feature
 				);
 			};
 			name = Release;
