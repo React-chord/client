@@ -136,11 +136,12 @@ const styles = StyleSheet.create({
   newButton: {
     width: 80,
     height: 30,
-    backgroundColor: '#000000',
+    backgroundColor: '#37474f',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 4,
-    margin: 5
+    margin: 2,
+    bottom: 15
   },
   flexContainer: {
     height:200,
