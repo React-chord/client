@@ -3,12 +3,12 @@ import {
   View,
   StyleSheet,
   Text,
-  TouchableOpacity,
   Image,
 } from 'react-native';
 import { connect } from 'react-redux';
 
 import Orientation from 'react-native-orientation';
+import Recording from 'react-native-recording';
 import Tuner from './TuningProcess/Tuner';
 import Button from './componentScale/Button';
 import { Initial } from './componentScale/scales';
@@ -48,6 +48,7 @@ class Board extends Component {
 
   componentWillUnmount() {
     Orientation.unlockAllOrientations();
+    Recording.stop();
   }
 
   _handleSetBoard = value => this.setState({ boardDisplay: value })
@@ -55,7 +56,7 @@ class Board extends Component {
   _handleBoardDisplay = (boardName, index) => {
     const { getScales } = this.props;
     const { boardDisplay } = this.state;
-
+    console.log('...getscales', getScales);
     switch (boardDisplay) {
       case E:
         if (

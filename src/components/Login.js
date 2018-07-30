@@ -6,13 +6,11 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
-  TouchableNativeFeedback,
   AsyncStorage,
 } from 'react-native';
 import {
-  Text, Button, FormInput, FormValidationMessage,
+  Button, FormInput, FormValidationMessage,
 } from 'react-native-elements';
-import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
 
 import styles from '../styles/styles';
 import { userLogin, userRegister } from '../store/actions';
@@ -177,22 +175,6 @@ class Login extends Component {
     });
   };
 
-  loginByGoogle = async () => {
-    try {
-      await GoogleSignin.hasPlayServices({ autoResolve: true });
-      await GoogleSignin.configure();
-      const user = await GoogleSignin.signIn();
-      console.log('====================================');
-      console.log('login');
-      console.log(user);
-      console.log('====================================');
-    } catch (error) {
-      console.log('====================================');
-      console.log(error);
-      console.log('====================================');
-    }
-  };
-
   login = async () => {
     const { email, password, formValidation } = this.state;
     const { login, navigation } = this.props;
@@ -283,36 +265,6 @@ class Login extends Component {
             {formValidation.password.message}
           </FormValidationMessage>
         ) : null}
-        <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-          <GoogleSigninButton
-            style={{ width: 48, height: 48, marginLeft: 10 }}
-            size={GoogleSigninButton.Size.Icon}
-            color={GoogleSigninButton.Color.Dark}
-          />
-          <TouchableNativeFeedback onPress={this.loginByGoogle}>
-            <View
-              style={{
-                flex: 1,
-                marginLeft: 0,
-                height: 40,
-                backgroundColor: 'blue',
-                marginTop: 4,
-                marginRight: 15,
-              }}
-            >
-              <Text
-                style={{
-                  textAlign: 'center',
-                  lineHeight: 40,
-                  color: 'white',
-                  fontSize: 16,
-                }}
-              >
-                Sign in by Google
-              </Text>
-            </View>
-          </TouchableNativeFeedback>
-        </View>
       </View>
     );
   };

@@ -1,23 +1,25 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import {
+  Text, View, TouchableOpacity, StyleSheet,
+} from 'react-native';
 import { connect } from 'react-redux';
-
+import Icon from 'react-native-vector-icons/Ionicons';
 import styles from '../styles/styles';
 import { generateChords } from '../store/actions';
 
 class Home extends Component {
   state = {
-    navigations: ['Quiz', 'Scale'],
+    navigations: ['ChordPractice', 'Scale', 'Quiz'],
   };
+
+  componentDidMount() {
+    this.props.getChords();
+  }
 
   navigateTo = destination => () => {
     const { navigation } = this.props;
     navigation.navigate(destination);
   };
-
-  componentDidMount(){
-    this.props.getChords()
-  }
 
   render() {
     const { navigations } = this.state;
@@ -33,8 +35,9 @@ class Home extends Component {
             key={index}
           >
             <TouchableOpacity onPress={this.navigateTo(destination)}>
+              <Icon style={style.actionButtonIcon} name="ios-musical-notes" />
               <Text style={{ color: 'white' }}>
-                {`To ${destination} Page`}
+                {`${destination} Page`}
               </Text>
             </TouchableOpacity>
           </View>
@@ -44,10 +47,20 @@ class Home extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getChords: () => dispatch(generateChords())
-  }
-}
+const style = StyleSheet.create({
+  actionButtonIcon: {
+    fontSize: 50,
+    height: 50,
+    color: '#ff6f00',
+    textAlign: 'center',
+  },
+});
 
-export default connect(null, mapDispatchToProps)(Home);
+const mapDispatchToProps = dispatch => ({
+  getChords: () => dispatch(generateChords()),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Home);
