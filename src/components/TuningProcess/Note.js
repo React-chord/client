@@ -1,24 +1,20 @@
 import React, { PureComponent } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  Platform,
+  View, Text, StyleSheet, Platform,
 } from 'react-native';
 
 export default class Note extends PureComponent {
   render() {
-    const { name, octave } = this.props;
     return (
       <View style={style.note}>
         <Text style={style.name}>
-          {name[0]}
+          {this.props.name[0]}
         </Text>
         <Text style={style.octave}>
-          {octave}
+          {this.props.octave}
         </Text>
         <Text style={style.sharp}>
-          {name[1]}
+          {this.props.name[1]}
         </Text>
       </View>
     );

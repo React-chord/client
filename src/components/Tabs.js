@@ -76,7 +76,7 @@ class Tabs extends Component {
   }
 
   handleActionStop() {
-    const {state} = this;
+    const state = this;
     state.tuner.stop();
     state.setState(prevState => ({ btnActive: !prevState.btnActive }));
     state.setState({
@@ -91,7 +91,7 @@ class Tabs extends Component {
   }
 
   handleActionStart() {
-    const {state} = this;
+    const state = this;
     // let isActive = false;
     // if (state.btnActive) {
     //   isActive = false;

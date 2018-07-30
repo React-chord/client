@@ -30,7 +30,6 @@ class ChordPractice extends Component {
       score: 0,
       showScore: false,
     };
-
     this.sampleRate = 22050;
     this.bufferSize = 2048;
     this.pitchFinder = new PitchFinder.YIN({ sampleRate: this.sampleRate });

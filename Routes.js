@@ -1,10 +1,10 @@
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
-
+import React from 'react';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import Home from './src/components/Home';
 import Login from './src/components/Login';
 import Tuning from './src/components/Tuning';
 import Scale from './src/components/Scale';
-import Tabs from './src/components/Tabs';
 import Profile from './src/components/Profile';
 import ChordPractice from './src/components/ChordPractice';
 import Comingsoon from './src/components/Comingsoon';
@@ -22,36 +22,26 @@ const userStackNavigation = createStackNavigator(
 const homeStackNavigation = createStackNavigator(
   {
     Home: { screen: Home },
-    Quiz: { screen: Comingsoon },
+    Tuning: { screen: Tuning },
     Scale: { screen: Scale },
     ChordPractice: { screen: ChordPractice },
-    Tuning: { screen: Tuning },
+    Quiz: { screen: Comingsoon },
   },
   {
     initialRouteName: 'Home',
-    navigationOptions: {
-      headerStyle: {
-        backgroundColor: '#000',
-        height: 70,
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-    },
+    navigationOptions: { header: null },
   },
 );
 
-homeStackNavigation.navigationOptions = ({ navigation }) => {
-  let tabBarVisible = true;
-  if (navigation.state.index > 0) {
-    tabBarVisible = false;
-  }
-
-  return {
-    tabBarVisible,
-  };
-};
+// homeStackNavigation.navigationOptions = ({ navigation }) => {
+//   let tabBarVisible = true;
+//   if (navigation.state.index > 0) {
+//     tabBarVisible = false;
+//   }
+//   return {
+//     tabBarVisible,
+//   };
+// };
 
 const bottomNavigation = createBottomTabNavigator(
   {
@@ -60,6 +50,29 @@ const bottomNavigation = createBottomTabNavigator(
   },
   {
     initialRouteName: 'Home',
+    navigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, tintColor }) => {
+        const { routeName } = navigation.state;
+        let iconName;
+        if (routeName === 'Home') {
+          iconName = `ios-home${focused ? '' : '-outline'}`;
+        } else if (routeName === 'Profile') {
+          iconName = `ios-contacts${focused ? '' : '-outline'}`;
+        }
+        // You can return any component that you like here! We usually use an
+        // icon component from react-native-vector-icons
+        return <Ionicons name={iconName} size={25} color={tintColor} />;
+      },
+      tabBarOptions: {
+        activeTintColor: '#ff6f00',
+        labelStyle: {
+          fontSize: 12,
+        },
+        style: {
+          backgroundColor: '#20242b',
+        },
+      },
+    }),
   },
 );
 

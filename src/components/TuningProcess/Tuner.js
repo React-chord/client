@@ -1,5 +1,6 @@
 import Recording from 'react-native-recording';
 import PitchFinder from 'pitchfinder';
+// import detector from "chord_detector";
 
 export default class Tuner {
   middleA = 440;
@@ -11,18 +12,38 @@ export default class Tuner {
   constructor(sampleRate = 22050, bufferSize = 2048) {
     this.sampleRate = sampleRate;
     this.bufferSize = bufferSize;
-    this.pitchFinder = new PitchFinder.YIN({ sampleRate: this.sampleRate, threshold: 0.15 });
+    this.pitchFinder = new PitchFinder.YIN({ sampleRate: this.sampleRate });
   }
 
   start() {
     Recording.init({
-      bufferSize: 4096,
-      sampleRate: 44100,
-      bitsPerChannel: 50,
+      bufferSize: 2048,
+      sampleRate: 22050,
+      bitsPerChannel: 16,
       channelsPerFrame: 1,
     });
     Recording.addRecordingEventListener((data) => {
+      // let sum = underscore.reduce(
+      //   data,
+      //   function(memo, num) {
+      //     return memo + num;
+      //   },
+      //   0
+      // );
+      // console.log("sum: ", sum);
       const frequency = this.pitchFinder(data);
+      console.log('frequency', frequency);
+      // const chromagram = new detector.Chromagram(1024, 44100);
+      // const chordDetector = new detector.ChordDetector();
+
+      // if (!chromagram.isReady()) return;
+      // currentChroma = chromagram.getChromagram();
+      // chordDetector.detectChord(currentChroma);
+
+      // console.log(chordDetector.rootNote());
+      // console.log(chordDetector.quality());
+
+      // chromagram.processAudioFrame(data);
       if (frequency && this.onNoteDetected) {
         const note = this.getNote(frequency);
         this.onNoteDetected({
@@ -37,10 +58,6 @@ export default class Tuner {
     Recording.start();
   }
 
-  stop() {
-    Recording.stop();
-  }
-
   /**
    * get musical note from frequency
    *
@@ -50,7 +67,6 @@ export default class Tuner {
   getNote(frequency) {
     const note = 12 * (Math.log(frequency / this.middleA) / Math.log(2));
     return Math.round(note) + this.semitone;
-    // console.log(frequency);
   }
 
   /**
@@ -60,7 +76,6 @@ export default class Tuner {
    * @returns {number}
    */
   getStandardFrequency(note) {
-    // console.log(note);
     return this.middleA * Math.pow(2, (note - this.semitone) / 12);
   }
 
@@ -72,7 +87,6 @@ export default class Tuner {
    * @returns {int}
    */
   getCents(frequency, note) {
-    // console.log(frequency);
     return Math.floor((1200 * Math.log(frequency / this.getStandardFrequency(note))) / Math.log(2));
   }
 }

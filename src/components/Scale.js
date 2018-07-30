@@ -51,7 +51,7 @@ class Board extends Component {
   }
 
   componentWillUnmount() {
-    Orientation.unlockAllOrientations();
+    Orientation.lockToPortrait();
     Recording.stop();
   }
 
