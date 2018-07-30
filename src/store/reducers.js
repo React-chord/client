@@ -6,7 +6,7 @@ const chordReducers = (state, action) => {
       newState = [];
       newState = [...action.payload];
 
-      return newState;
+      return {...state, scales: newState};
 
     case 'SET_TUNING':
       newState = state.slice();
