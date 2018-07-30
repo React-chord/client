@@ -11,6 +11,7 @@ const initialState = {
   },
   isLoading: false,
   allChords: [],
+  scales: [],
 };
 
 const store = createStore(reducers, initialState, applyMiddleware(thunk, logger));

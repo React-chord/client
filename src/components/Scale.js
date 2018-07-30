@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
+import Orientation from 'react-native-orientation';
 import Tuner from './TuningProcess/Tuner';
-import Orientation from 'react-native-orientation'
 import Button from './componentScale/Button';
 import { Initial } from './componentScale/scales';
 import { setTuning } from '../store/actions';
@@ -416,7 +416,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  getScales: state,
+  getScales: state.scales,
 });
 
 const mapDispatchToProps = dispatch => ({
