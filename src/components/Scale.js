@@ -3,12 +3,12 @@ import {
   View,
   StyleSheet,
   Text,
-  TouchableOpacity,
   Image,
 } from 'react-native';
 import { connect } from 'react-redux';
 
 import Orientation from 'react-native-orientation';
+import Recording from 'react-native-recording';
 import Tuner from './TuningProcess/Tuner';
 import Button from './componentScale/Button';
 import { Initial } from './componentScale/scales';
@@ -16,9 +16,9 @@ import { setTuning } from '../store/actions';
 import {
   G, A, B, C, D, E, F, F2, G2, A2, C2, D2,
 } from './componentScale/scales';
-import {
-  e, a, g, f, b, c, d, f2, g2, a2, c2, d2,
-} from './componentScale/elementScales';
+// import {
+//   e, a, g, f, b, c, d, f2, g2, a2, c2, d2,
+// } from './componentScale/elementScales';
 
 const remote = 'https://storage.googleapis.com/upload-portofolio/1532880831221.jpg!d';
 
@@ -48,6 +48,7 @@ class Board extends Component {
 
   componentWillUnmount() {
     Orientation.unlockAllOrientations();
+    Recording.stop();
   }
 
   _handleSetBoard = value => this.setState({ boardDisplay: value })
