@@ -16,9 +16,9 @@ import { setTuning } from '../store/actions';
 import {
   G, A, B, C, D, E, F, F2, G2, A2, C2, D2,
 } from './componentScale/scales';
-// import {
-//   e, a, g, f, b, c, d, f2, g2, a2, c2, d2,
-// } from './componentScale/elementScales';
+import {
+  e, a, g, f, b, c, d, f2, g2, a2, c2, d2,
+} from './componentScale/elementScales';
 
 const remote = 'https://storage.googleapis.com/upload-portofolio/1532880831221.jpg!d';
 
@@ -56,7 +56,7 @@ class Board extends Component {
   _handleBoardDisplay = (boardName, index) => {
     const { getScales } = this.props;
     const { boardDisplay } = this.state;
-
+    console.log('...getscales', getScales);
     switch (boardDisplay) {
       case E:
         if (

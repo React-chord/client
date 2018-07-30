@@ -150,8 +150,6 @@ android {
 dependencies {
     compile project(':react-native-vector-icons')
     compile project(':react-native-orientation')
-    compile project(':react-native-google-signin')
-    implementation project(':react-native-firebase')
     implementation "com.google.android.gms:play-services-base:15.0.1"
     implementation "com.google.firebase:firebase-core:16.0.1"
     implementation project(':react-native-vector-icons')
@@ -170,5 +168,3 @@ task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
 }
-
-apply plugin: 'com.google.gms.google-services'

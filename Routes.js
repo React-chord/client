@@ -31,7 +31,7 @@ const homeStackNavigation = createStackNavigator(
     navigationOptions: {
       headerStyle: {
         backgroundColor: '#000',
-        height: 40,
+        height: 70,
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
