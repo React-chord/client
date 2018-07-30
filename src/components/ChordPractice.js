@@ -214,12 +214,25 @@ class ChordPractice extends Component {
             ):(
               <Icon name="ios-checkbox" style={{ color:'grey', fontSize:40 }}></Icon>
             )}
-            <Button
+            {/* <Button
               onPress={this.handleButton.bind(this)}
               title="Start"
               color="#841584"
               disabled={buttonState}
-            />
+            /> */}
+
+            <TouchableOpacity
+              onPress={this.handleButton.bind(this)}
+              style={styles.button}
+            >
+              <View>
+                {buttonState ? (
+                  <Icon style={styles.buttonIcon} name="ios-square" />
+                ) : (
+                  <Icon style={styles.buttonIcon} name="ios-play" />
+                )}
+              </View>
+            </TouchableOpacity>
 
             {buttonState ? (
               <View>
@@ -288,6 +301,15 @@ const styles = StyleSheet.create({
   loading: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'center'
   },
-});
+  button: {
+    // alignItems: 'center',
+    backgroundColor: '#ff6f00',
+    padding: 13
+  },
+  buttonIcon: {
+    color: 'black',
+    fontSize: 20
+  }
+})
