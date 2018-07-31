@@ -32,7 +32,7 @@ const style = StyleSheet.create({
     marginBottom: 10,
   },
   name: {
-    fontSize: 128,
+    fontSize: 108,
     fontWeight: '600',
     color: '#c62828',
     flexDirection: 'row',

@@ -25,6 +25,7 @@ const homeStackNavigation = createStackNavigator(
     Quiz: { screen: Comingsoon },
     Scale: { screen: Scale },
     ChordPractice: { screen: ChordPractice },
+    Tuning: { screen: Tuning },
   },
   {
     initialRouteName: 'Home',
@@ -56,7 +57,6 @@ const bottomNavigation = createBottomTabNavigator(
   {
     Home: { screen: homeStackNavigation },
     Profile: userStackNavigation,
-    Tuning: { screen: Tuning },
   },
   {
     initialRouteName: 'Home',

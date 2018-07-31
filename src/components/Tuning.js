@@ -12,7 +12,7 @@ export default class Tuning extends Component {
     super(props);
     this.state = {
       note: {
-        name: 'X',
+        name: 'A',
         octave: 0,
         frequency: 440,
       },
@@ -22,6 +22,10 @@ export default class Tuning extends Component {
     this.handleActionStop = this.handleActionStop.bind(this);
     this.tuner = new Tuner();
   }
+
+  static navigationOptions = {
+    header: null,
+  };
 
   componentDidMount() {
     // const tuner = new Tuner();
@@ -102,6 +106,7 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#263238',
+    paddingTop: 50,
   },
   frequency: {
     fontSize: 28,

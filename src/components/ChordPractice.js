@@ -1,13 +1,15 @@
-import React, { Component } from 'react'
-import { View, Image, StyleSheet, TouchableOpacity, AsyncStorage } from 'react-native'
-import { Text } from 'react-native-elements'
-import Icon from 'react-native-vector-icons/Ionicons'
-import Recording from 'react-native-recording'
-import PitchFinder from 'pitchfinder'
+import React, { Component } from 'react';
+import {
+  View, Image, StyleSheet, TouchableOpacity, AsyncStorage,
+} from 'react-native';
+import { Text } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/Ionicons';
+import Recording from 'react-native-recording';
+import PitchFinder from 'pitchfinder';
+import { connect } from 'react-redux';
+import Carousel from 'react-native-carousel-view';
+import Promise from 'bluebird';
 import { generateChords, saveScoreActions } from '../store/actions';
-import { connect } from 'react-redux'
-import Carousel from 'react-native-carousel-view'
-import Promise from 'bluebird'
 
 class ChordPractice extends Component {
   middleA = 440
@@ -26,8 +28,8 @@ class ChordPractice extends Component {
       hitCount: 0,
       isListening: false,
       score: 0,
-      showScore: false
-    }
+      showScore: false,
+    };
 
     this.sampleRate = 22050;
     this.bufferSize = 2048;
@@ -45,8 +47,8 @@ class ChordPractice extends Component {
       hitCount: 0,
       isListening: false,
       score: 0,
-      showScore: false
-    })
+      showScore: false,
+    });
   }
 
   start() {
@@ -81,19 +83,27 @@ class ChordPractice extends Component {
         isListening: false,
       });
       this._timeoutDetecting = setTimeout(async () => {
-        await this.setState({ isListening: true, chordResult: false})
-        this._timeoutDetecting = null
+        await this.setState({ isListening: true, chordResult: false });
+        this._timeoutDetecting = null;
       }, 1000);
     } else {
       await this.setState({
-        chordResult: false
-      })
+        chordResult: false,
+      });
     }
   }
 
   getNote(frequency) {
     const note = 12 * (Math.log(frequency / this.middleA) / Math.log(2));
     return Math.round(note) + this.semitone;
+  }
+
+  componentWillUnmount() {
+    this.setState({
+      chordResult: false,
+      currentIndex: 0,
+      buttonState: false,
+    });
   }
 
   getScore() {
@@ -104,29 +114,29 @@ class ChordPractice extends Component {
   }
 
   saveUserScore() {
-    const token = AsyncStorage.getItem('token')
+    const token = AsyncStorage.getItem('token');
 
-    let { chords } = this.props
-    let { currentIndex } = this.state
+    const { chords } = this.props;
+    const { currentIndex } = this.state;
 
-    let score = this.state.score
-    let note = chords[currentIndex].chord
+    const score = this.state.score;
+    const note = chords[currentIndex].chord;
 
     if (token) {
-      this.props.saveScore(note, score)
+      this.props.saveScore(note, score);
     }
   }
 
   handleChange() {
-    if(this.state.currentIndex < 6){
+    if (this.state.currentIndex < 6) {
       this.setState({
         currentIndex: this.state.currentIndex + 1,
         buttonState: false,
         chordResult: false,
         hitCount: 0,
         score: 0,
-        showScore: false
-      })
+        showScore: false,
+      });
     } else {
       this.setState({
         currentIndex: this.state.currentIndex - 1,
@@ -134,107 +144,123 @@ class ChordPractice extends Component {
         chordResult: false,
         hitCount: 0,
         score: 0,
-        showScore: false
-      })
+        showScore: false,
+      });
     }
   }
 
   handleState() {
     this.setState({
-        buttonState: false,
-        chordResult: false,
-        showScore: true
-    })
+      buttonState: false,
+      chordResult: false,
+      showScore: true,
+    });
   }
 
   handleButton() {
-    this.start()
+    this.start();
     this.setState({
-      buttonState: true
-    })
+      buttonState: true,
+    });
     this._setTimeout = setTimeout(() => {
-      this.handleState()
-      Recording.stop()
-      this.getScore()
-      this.saveUserScore()
-    } , 5000)
+      this.handleState();
+      Recording.stop();
+      this.getScore();
+      this.saveUserScore();
+    }, 5000);
   }
 
-  render () {
-    const { chordResult, buttonState, score, hitCount, showScore } = this.state
-      if (this.props.chords.length > 0) {
-        return (
+  render() {
+    const {
+ chordResult, buttonState, score, hitCount, showScore 
+} = this.state;
+    if (this.props.chords.length > 0) {
+      return (
           <View style={styles.mainContainer}>
             <View style={styles.container}>
               <Carousel
                 width={375}
                 height={500}
-                hideIndicators={true}
+                hideIndicators
                 initialPage={0}
                 animate={false}
-                onPageChange = { () => this.handleChange() }
-                >
+                onPageChange ={() => this.handleChange()}
+              >
 
                 <View style={styles.contentContainer}>
-                  <Text style={styles.text}>{this.props.chords[0].chord}</Text>          
-                  <Image 
+                  <Text style={styles.text}>
+{this.props.chords[0].chord}
+</Text>
+                  <Image
                     source={{ uri: this.props.chords[0].imageUrl }}
                     style={styles.image}
                   />
                 </View>
 
                 <View style={styles.contentContainer}>
-                  <Text style={styles.text}>{this.props.chords[1].chord}</Text>          
-                  <Image 
+                  <Text style={styles.text}>
+{this.props.chords[1].chord}
+</Text>
+                  <Image
                     source={{ uri: this.props.chords[1].imageUrl }}
                     style={styles.image}
                   />
                 </View>
 
                 <View style={styles.contentContainer}>
-                  <Text style={styles.text}>{this.props.chords[2].chord}</Text>          
-                  <Image 
+                  <Text style={styles.text}>
+{this.props.chords[2].chord}
+</Text>
+                  <Image
                     source={{ uri: this.props.chords[2].imageUrl }}
                     style={styles.image}
                   />
                 </View>
 
                 <View style={styles.contentContainer}>
-                  <Text style={styles.text}>{this.props.chords[3].chord}</Text>          
-                  <Image 
+                  <Text style={styles.text}>
+{this.props.chords[3].chord}
+</Text>
+                  <Image
                     source={{ uri: this.props.chords[3].imageUrl }}
                     style={styles.image}
                   />
                 </View>
 
                 <View style={styles.contentContainer}>
-                  <Text style={styles.text}>{this.props.chords[4].chord}</Text>          
-                  <Image 
+                  <Text style={styles.text}>
+{this.props.chords[4].chord}
+</Text>
+                  <Image
                     source={{ uri: this.props.chords[4].imageUrl }}
                     style={styles.image}
                   />
                 </View>
 
                 <View style={styles.contentContainer}>
-                  <Text style={styles.text}>{this.props.chords[5].chord}</Text>          
-                  <Image 
+                  <Text style={styles.text}>
+{this.props.chords[5].chord}
+</Text>
+                  <Image
                     source={{ uri: this.props.chords[5].imageUrl }}
                     style={styles.image}
                   />
                 </View>
 
                 <View style={styles.contentContainer}>
-                  <Text style={styles.text}>{this.props.chords[6].chord}</Text>          
-                  <Image 
+                  <Text style={styles.text}>
+{this.props.chords[6].chord}
+</Text>
+                  <Image
                     source={{ uri: this.props.chords[6].imageUrl }}
                     style={styles.image}
                   />
                 </View>
-                
+
               </Carousel>
 
-              <View style={{flexDirection: 'row'}}>
-              <TouchableOpacity
+              <View style={{ flexDirection: 'row' }}>
+                <TouchableOpacity
                 onPress={this.handleButton.bind(this)}
                 style={styles.button}
               >
@@ -247,49 +273,60 @@ class ChordPractice extends Component {
                 </View>
               </TouchableOpacity>
 
-              {chordResult ? (
-                <Icon name="ios-checkmark-circle" style={{ color:'limegreen', fontSize:40 }}></Icon>
-              ):(
-                <Icon name="ios-checkmark-circle" style={{ color:'grey', fontSize:40 }}></Icon>
+                {chordResult ? (
+                <Icon name="ios-checkmark-circle" style={{ color: 'limegreen', fontSize: 40 }} />
+              ) : (
+                <Icon name="ios-checkmark-circle" style={{ color: 'grey', fontSize: 40 }} />
               )}
               </View>
-              
+
               <View>
                 {showScore ? (
-                  <View style={styles.score}> 
-                    <Text style={styles.resultText1}>Count : {hitCount}</Text>
-                    <Text style={styles.resultText}>Score : {score}%</Text>
+                  <View style={styles.score}>
+                    <Text style={styles.resultText1}>
+Count :
+{' '}
+{hitCount}
+</Text>
+                    <Text style={styles.resultText}>
+Score :
+{' '}
+{score}
+%
+</Text>
                   </View>
-                ):(
-                  <View style={{ marginTop: 20 }}> 
-                    <Text style={styles.resultText}>Count : {hitCount}</Text>
+                ) : (
+                  <View style={{ marginTop: 20 }}>
+                    <Text style={styles.resultText}>
+Count :
+{' '}
+{hitCount}
+</Text>
                   </View>
                 )}
               </View>
 
             </View>
           </View>
-        )
-      } else {
-        return (
+      );
+    }
+    return (
           <View style={styles.loading}>
-            <Image style={{ width:50, height:50 }} source={require('../assets/loading.gif')} />
+            <Image style={{ width: 50, height: 50 }} source={require('../assets/loading.gif')} />
           </View>
-        ) 
-      }
+    );
+
   }
 }
 
-const mapStateToProps = (state) => ({
-    chords: state.allChords
-  });
+const mapStateToProps = state => ({
+  chords: state.allChords,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getChords: () => dispatch(generateChords()),
-    saveScore: (note, score) => dispatch(saveScoreActions(note, score))
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  getChords: () => dispatch(generateChords()),
+  saveScore: (note, score) => dispatch(saveScoreActions(note, score)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChordPractice);
 
@@ -297,25 +334,25 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#22262d'
+    backgroundColor: '#22262d',
   },
   container: {
     flex: 0.5,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 80
+    marginTop: 80,
   },
   contentContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: -50
+    marginBottom: -50,
   },
   text: {
     marginTop: 30,
     fontSize: 75,
     color: 'red',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   image: {
     width: 250,
@@ -325,7 +362,7 @@ const styles = StyleSheet.create({
   loading: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   button: {
     backgroundColor: '#ff6f00',
@@ -334,24 +371,24 @@ const styles = StyleSheet.create({
     paddingRight: 15,
     paddingLeft: 15,
     borderRadius: 30,
-    marginRight: 10
+    marginRight: 10,
   },
   buttonIcon: {
     color: 'black',
-    fontSize: 20
+    fontSize: 20,
   },
   score: {
     marginTop: 20,
     color: 'white',
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   resultText: {
     color: 'white',
-    fontSize: 20
+    fontSize: 20,
   },
   resultText1: {
     color: 'white',
     fontSize: 20,
-    marginRight: 100
-  }
-})
+    marginRight: 100,
+  },
+});

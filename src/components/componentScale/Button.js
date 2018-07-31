@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 4,
     margin: 2,
-    bottom: 15,
+    bottom: 5,
   },
   flexContainer: {
     height: 200,
