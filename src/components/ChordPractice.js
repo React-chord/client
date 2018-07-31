@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Image, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Image, StyleSheet, TouchableOpacity, AsyncStorage } from 'react-native'
 import { Text } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/Ionicons'
 import Recording from 'react-native-recording'
@@ -8,7 +8,6 @@ import { generateChords, saveScoreActions } from '../store/actions';
 import { connect } from 'react-redux'
 import Carousel from 'react-native-carousel-view'
 import Promise from 'bluebird'
-import { generateChords } from '../store/actions';
 
 class ChordPractice extends Component {
   middleA = 440
@@ -105,7 +104,7 @@ class ChordPractice extends Component {
   }
 
   saveUserScore() {
-    const token = await AsyncStorage.getItem('token')
+    const token = AsyncStorage.getItem('token')
 
     let { chords } = this.props
     let { currentIndex } = this.state
@@ -165,111 +164,111 @@ class ChordPractice extends Component {
     const { chordResult, buttonState, score, hitCount, showScore } = this.state
       if (this.props.chords.length > 0) {
         return (
-        <View style={styles.mainContainer}>
-          <View style={styles.container}>
-            <Carousel
-              width={375}
-              height={500}
-              hideIndicators={true}
-              initialPage={0}
-              animate={false}
-              onPageChange = { () => this.handleChange() }
+          <View style={styles.mainContainer}>
+            <View style={styles.container}>
+              <Carousel
+                width={375}
+                height={500}
+                hideIndicators={true}
+                initialPage={0}
+                animate={false}
+                onPageChange = { () => this.handleChange() }
+                >
+
+                <View style={styles.contentContainer}>
+                  <Text style={styles.text}>{this.props.chords[0].chord}</Text>          
+                  <Image 
+                    source={{ uri: this.props.chords[0].imageUrl }}
+                    style={styles.image}
+                  />
+                </View>
+
+                <View style={styles.contentContainer}>
+                  <Text style={styles.text}>{this.props.chords[1].chord}</Text>          
+                  <Image 
+                    source={{ uri: this.props.chords[1].imageUrl }}
+                    style={styles.image}
+                  />
+                </View>
+
+                <View style={styles.contentContainer}>
+                  <Text style={styles.text}>{this.props.chords[2].chord}</Text>          
+                  <Image 
+                    source={{ uri: this.props.chords[2].imageUrl }}
+                    style={styles.image}
+                  />
+                </View>
+
+                <View style={styles.contentContainer}>
+                  <Text style={styles.text}>{this.props.chords[3].chord}</Text>          
+                  <Image 
+                    source={{ uri: this.props.chords[3].imageUrl }}
+                    style={styles.image}
+                  />
+                </View>
+
+                <View style={styles.contentContainer}>
+                  <Text style={styles.text}>{this.props.chords[4].chord}</Text>          
+                  <Image 
+                    source={{ uri: this.props.chords[4].imageUrl }}
+                    style={styles.image}
+                  />
+                </View>
+
+                <View style={styles.contentContainer}>
+                  <Text style={styles.text}>{this.props.chords[5].chord}</Text>          
+                  <Image 
+                    source={{ uri: this.props.chords[5].imageUrl }}
+                    style={styles.image}
+                  />
+                </View>
+
+                <View style={styles.contentContainer}>
+                  <Text style={styles.text}>{this.props.chords[6].chord}</Text>          
+                  <Image 
+                    source={{ uri: this.props.chords[6].imageUrl }}
+                    style={styles.image}
+                  />
+                </View>
+                
+              </Carousel>
+
+              <View style={{flexDirection: 'row'}}>
+              <TouchableOpacity
+                onPress={this.handleButton.bind(this)}
+                style={styles.button}
               >
+                <View>
+                  {buttonState ? (
+                    <Icon style={styles.buttonIcon} name="ios-pause" />
+                  ) : (
+                    <Icon style={styles.buttonIcon} name="ios-play" />
+                  )}
+                </View>
+              </TouchableOpacity>
 
-              <View style={styles.contentContainer}>
-                <Text style={styles.text}>{this.props.chords[0].chord}</Text>          
-                <Image 
-                  source={{ uri: this.props.chords[0].imageUrl }}
-                  style={styles.image}
-                />
-              </View>
-
-              <View style={styles.contentContainer}>
-                <Text style={styles.text}>{this.props.chords[1].chord}</Text>          
-                <Image 
-                  source={{ uri: this.props.chords[1].imageUrl }}
-                  style={styles.image}
-                />
-              </View>
-
-              <View style={styles.contentContainer}>
-                <Text style={styles.text}>{this.props.chords[2].chord}</Text>          
-                <Image 
-                  source={{ uri: this.props.chords[2].imageUrl }}
-                  style={styles.image}
-                />
-              </View>
-
-              <View style={styles.contentContainer}>
-                <Text style={styles.text}>{this.props.chords[3].chord}</Text>          
-                <Image 
-                  source={{ uri: this.props.chords[3].imageUrl }}
-                  style={styles.image}
-                />
-              </View>
-
-              <View style={styles.contentContainer}>
-                <Text style={styles.text}>{this.props.chords[4].chord}</Text>          
-                <Image 
-                  source={{ uri: this.props.chords[4].imageUrl }}
-                  style={styles.image}
-                />
-              </View>
-
-              <View style={styles.contentContainer}>
-                <Text style={styles.text}>{this.props.chords[5].chord}</Text>          
-                <Image 
-                  source={{ uri: this.props.chords[5].imageUrl }}
-                  style={styles.image}
-                />
-              </View>
-
-              <View style={styles.contentContainer}>
-                <Text style={styles.text}>{this.props.chords[6].chord}</Text>          
-                <Image 
-                  source={{ uri: this.props.chords[6].imageUrl }}
-                  style={styles.image}
-                />
+              {chordResult ? (
+                <Icon name="ios-checkmark-circle" style={{ color:'limegreen', fontSize:40 }}></Icon>
+              ):(
+                <Icon name="ios-checkmark-circle" style={{ color:'grey', fontSize:40 }}></Icon>
+              )}
               </View>
               
-            </Carousel>
-
-            <View style={{flexDirection: 'row'}}>
-            <TouchableOpacity
-              onPress={this.handleButton.bind(this)}
-              style={styles.button}
-            >
               <View>
-                {buttonState ? (
-                  <Icon style={styles.buttonIcon} name="ios-pause" />
-                ) : (
-                  <Icon style={styles.buttonIcon} name="ios-play" />
+                {showScore ? (
+                  <View style={styles.score}> 
+                    <Text style={styles.resultText1}>Count : {hitCount}</Text>
+                    <Text style={styles.resultText}>Score : {score}%</Text>
+                  </View>
+                ):(
+                  <View style={{ marginTop: 20 }}> 
+                    <Text style={styles.resultText}>Count : {hitCount}</Text>
+                  </View>
                 )}
               </View>
-            </TouchableOpacity>
 
-            {chordResult ? (
-              <Icon name="ios-checkmark-circle" style={{ color:'limegreen', fontSize:40 }}></Icon>
-            ):(
-              <Icon name="ios-checkmark-circle" style={{ color:'grey', fontSize:40 }}></Icon>
-            )}
             </View>
-            
-            <View>
-              {showScore ? (
-                <View style={styles.score}> 
-                  <Text style={styles.resultText1}>Count : {hitCount}</Text>
-                  <Text style={styles.resultText}>Score : {score}%</Text>
-                </View>
-              ):(
-                <View style={{ marginTop: 20 }}> 
-                  <Text style={styles.resultText}>Count : {hitCount}</Text>
-                </View>
-              )}
-            </View>
-
           </View>
-        </View>
         )
       } else {
         return (
@@ -277,7 +276,7 @@ class ChordPractice extends Component {
             <Image style={{ width:50, height:50 }} source={require('../assets/loading.gif')} />
           </View>
         ) 
-      
+      }
   }
 }
 
@@ -315,7 +314,7 @@ const styles = StyleSheet.create({
   text: {
     marginTop: 30,
     fontSize: 75,
-    color: '#ff6f00',
+    color: 'red',
     fontWeight: 'bold'
   },
   image: {
