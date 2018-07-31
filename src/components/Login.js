@@ -121,7 +121,6 @@ class Login extends Component {
     if (!user.fullname) {
       navigation.setParams({ showTabBar: false });
     }
-    this.navigationWillBlurListener = navigation.addListener('willBlur', this._navigationWillBlur);
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
     this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
   }
@@ -131,17 +130,8 @@ class Login extends Component {
   }
 
   componentWillUnmount() {
-    this.navigationWillBlurListener.remove();
     this.keyboardDidShowListener.remove();
     this.keyboardDidHideListener.remove();
-  }
-
-  _navigationWillBlur = () => {
-    const { user, navigation } = this.props;
-    console.log('will blur', user);
-    if (!user.fullname) {
-      navigation.navigate('Login');
-    }
   }
 
   _keyboardDidShow = () => {
@@ -252,8 +242,8 @@ class Login extends Component {
     if (formValidation.email && formValidation.password) {
       const result = await login({ email, password });
       await AsyncStorage.setItem('token', result.token);
-      navigation.setParams({ isLogin: true });
-      navigation.navigate('Profile');
+      Keyboard.dismiss();
+      navigation.replace('Profile');
     } else {
       await this.setState({
         ...initialFormState, warnForm: true,

@@ -33,10 +33,8 @@ class Profile extends Component {
 
   _willFocusListener = () => {
     const { navigation, user } = this.props;
-    console.log('will focus', user.fullname);
     if (!user.fullname) {
-      console.log('masuk if');
-      navigation.navigate('Login');
+      navigation.replace('Login');
     } else {
       this.countProgress(user.courses.practice);
     }
@@ -62,8 +60,6 @@ class Profile extends Component {
       });
     }
 
-    console.log('counted', initialProgress);
-
     this.setState({
       progressBar: initialProgress,
       isCounted: true,
@@ -81,7 +77,7 @@ class Profile extends Component {
       },
     };
     logout(initialUser);
-    navigation.navigate('Login');
+    navigation.replace('Login');
     await AsyncStorage.removeItem('token');
   };
 
