@@ -6,24 +6,25 @@ const chordReducers = (state, action) => {
       newState = [];
       newState = [...action.payload];
 
-      return {...state, scales: newState};
+      return { ...state, scales: newState };
 
     case 'SET_TUNING':
-      newState = state.slice();
-      const filterState = element => (
-        element.name === action.payload.name && element.octave === action.payload.octave
-      );
+      newState = state.scales.slice();
+      const filterState = element => element.name === action.payload.name && element.octave === action.payload.octave;
       const index = newState.findIndex(filterState);
+      console.log('payload', action.payload);
+      console.log('newstate', newState);
+      console.log('index', index);
 
       if (index !== -1) newState[index].hitted = true;
 
       setTimeout(() => {
         if (index !== -1) newState[index].hitted = false;
 
-        return newState;
+        return { ...state, scales: newState };
       }, 200);
 
-      return newState;
+      return { ...state, scales: newState };
 
     case 'IS_LOADING':
       return {
@@ -36,7 +37,7 @@ const chordReducers = (state, action) => {
         user: { ...action.payload },
       };
     case 'GET_CHORDS':
-      const newArr = [...action.payload.map(el => el = { ...el })];
+      const newArr = [...action.payload.map(el => (el = { ...el }))];
       return {
         ...state,
         allChords: newArr,

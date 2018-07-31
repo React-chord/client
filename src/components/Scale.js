@@ -3,12 +3,12 @@ import {
   View,
   StyleSheet,
   Text,
-  TouchableOpacity,
   Image,
 } from 'react-native';
 import { connect } from 'react-redux';
 
 import Orientation from 'react-native-orientation';
+import Recording from 'react-native-recording';
 import Tuner from './TuningProcess/Tuner';
 import Button from './componentScale/Button';
 import { Initial } from './componentScale/scales';
@@ -20,7 +20,7 @@ import {
   e, a, g, f, b, c, d, f2, g2, a2, c2, d2,
 } from './componentScale/elementScales';
 
-const remote = 'https://storage.googleapis.com/upload-portofolio/1532880831221.jpg!d';
+const remote = 'https://storage.googleapis.com/upload-portofolio/1532989580931.jpg!d';
 
 class Board extends Component {
   constructor(props) {
@@ -32,6 +32,10 @@ class Board extends Component {
 
     this._handleSetBoard = this._handleSetBoard.bind(this);
   }
+
+  static navigationOptions = {
+    header: null
+  };
 
   componentDidMount() {
     Orientation.lockToLandscape();
@@ -48,6 +52,7 @@ class Board extends Component {
 
   componentWillUnmount() {
     Orientation.unlockAllOrientations();
+    Recording.stop();
   }
 
   _handleSetBoard = value => this.setState({ boardDisplay: value })
@@ -55,7 +60,7 @@ class Board extends Component {
   _handleBoardDisplay = (boardName, index) => {
     const { getScales } = this.props;
     const { boardDisplay } = this.state;
-
+    console.log('...getscales', getScales);
     switch (boardDisplay) {
       case E:
         if (
@@ -293,13 +298,11 @@ class Board extends Component {
   render() {
     return (
       <View style={styles.scale}>
+        <Image
+          style={ styles.fixed }
+          source={{ uri: remote }}
+        />
         <View style={styles.container}>
-          <Image
-            style={{
-              flex: 1,
-            }}
-            source={{ uri: remote }}
-          />
           <View style={[styles.rowAlpha, styles.topOne]}>
             <Text style={{ fontWeight: 'bold', paddingRight: 15, color: 'transparent' }}>
               {' '}
@@ -349,7 +352,7 @@ _
             { this.board_six() }
           </View>
         </View>
-        <View>
+        <View style={ styles.button }>
           <Button handleSetBoard={value => this._handleSetBoard(value)} />
         </View>
       </View>
@@ -360,7 +363,7 @@ _
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: 'transparent',
     marginHorizontal: 10,
   },
   newButton: {
@@ -387,25 +390,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     position: 'absolute',
-    marginTop: 15,
+    marginTop: 25,
+    left: 17
   },
   topOne: {
-    top: 0,
+    top: -5,
   },
   topTwo: {
-    top: 40,
+    top: 25,
   },
   topThree: {
-    top: 80,
+    top: 65,
   },
   topFour: {
-    top: 120,
+    top: 105,
   },
   topFive: {
-    top: 160,
+    top: 145,
   },
   topSix: {
-    top: 200,
+    top: 185,
   },
   scale: {
     flex: 1,
@@ -413,6 +417,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#191717',
   },
+  fixed: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    marginVertical: 30,
+    marginHorizontal: 40,
+    height: 210
+  },
+  button: {
+    bottom: 30
+  }
 });
 
 const mapStateToProps = state => ({
