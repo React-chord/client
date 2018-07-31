@@ -114,17 +114,13 @@ class ChordPractice extends Component {
   }
 
   saveUserScore() {
-    const token = AsyncStorage.getItem('token');
-
-    const { chords } = this.props;
+    const { chords, saveScore } = this.props;
     const { currentIndex } = this.state;
 
     const score = this.state.score;
     const note = chords[currentIndex].chord;
-
-    if (token) {
-      this.props.saveScore(note, score);
-    }
+    console.log('masuk component')
+    saveScore(note, score);
   }
 
   handleChange() {
@@ -172,8 +168,8 @@ class ChordPractice extends Component {
 
   render() {
     const {
- chordResult, buttonState, score, hitCount, showScore 
-} = this.state;
+      chordResult, buttonState, score, hitCount, showScore 
+    } = this.state;
     if (this.props.chords.length > 0) {
       return (
           <View style={styles.mainContainer}>
@@ -189,8 +185,8 @@ class ChordPractice extends Component {
 
                 <View style={styles.contentContainer}>
                   <Text style={styles.text}>
-{this.props.chords[0].chord}
-</Text>
+                    {this.props.chords[0].chord}
+                  </Text>
                   <Image
                     source={{ uri: this.props.chords[0].imageUrl }}
                     style={styles.image}
@@ -199,8 +195,8 @@ class ChordPractice extends Component {
 
                 <View style={styles.contentContainer}>
                   <Text style={styles.text}>
-{this.props.chords[1].chord}
-</Text>
+                    {this.props.chords[1].chord}
+                  </Text>
                   <Image
                     source={{ uri: this.props.chords[1].imageUrl }}
                     style={styles.image}
@@ -209,8 +205,8 @@ class ChordPractice extends Component {
 
                 <View style={styles.contentContainer}>
                   <Text style={styles.text}>
-{this.props.chords[2].chord}
-</Text>
+                    {this.props.chords[2].chord}
+                  </Text>
                   <Image
                     source={{ uri: this.props.chords[2].imageUrl }}
                     style={styles.image}
@@ -219,8 +215,8 @@ class ChordPractice extends Component {
 
                 <View style={styles.contentContainer}>
                   <Text style={styles.text}>
-{this.props.chords[3].chord}
-</Text>
+                    {this.props.chords[3].chord}
+                  </Text>
                   <Image
                     source={{ uri: this.props.chords[3].imageUrl }}
                     style={styles.image}
@@ -229,8 +225,8 @@ class ChordPractice extends Component {
 
                 <View style={styles.contentContainer}>
                   <Text style={styles.text}>
-{this.props.chords[4].chord}
-</Text>
+                    {this.props.chords[4].chord}
+                  </Text>
                   <Image
                     source={{ uri: this.props.chords[4].imageUrl }}
                     style={styles.image}
@@ -239,8 +235,8 @@ class ChordPractice extends Component {
 
                 <View style={styles.contentContainer}>
                   <Text style={styles.text}>
-{this.props.chords[5].chord}
-</Text>
+                    {this.props.chords[5].chord}
+                  </Text>
                   <Image
                     source={{ uri: this.props.chords[5].imageUrl }}
                     style={styles.image}
@@ -249,8 +245,8 @@ class ChordPractice extends Component {
 
                 <View style={styles.contentContainer}>
                   <Text style={styles.text}>
-{this.props.chords[6].chord}
-</Text>
+                    {this.props.chords[6].chord}
+                  </Text>
                   <Image
                     source={{ uri: this.props.chords[6].imageUrl }}
                     style={styles.image}
@@ -284,24 +280,24 @@ class ChordPractice extends Component {
                 {showScore ? (
                   <View style={styles.score}>
                     <Text style={styles.resultText1}>
-Count :
-{' '}
-{hitCount}
-</Text>
+                      Count :
+                      {' '}
+                      {hitCount}
+                    </Text>
                     <Text style={styles.resultText}>
-Score :
-{' '}
-{score}
-%
-</Text>
+                      Score :
+                      {' '}
+                      {score}
+                      %
+                    </Text>
                   </View>
                 ) : (
                   <View style={{ marginTop: 20 }}>
                     <Text style={styles.resultText}>
-Count :
-{' '}
-{hitCount}
-</Text>
+                      Count :
+                      {' '}
+                      {hitCount}
+                    </Text>
                   </View>
                 )}
               </View>
@@ -315,7 +311,6 @@ Count :
             <Image style={{ width: 50, height: 50 }} source={require('../assets/loading.gif')} />
           </View>
     );
-
   }
 }
 
