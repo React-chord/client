@@ -9,6 +9,7 @@ import {
   AsyncStorage,
   TextInput,
   SafeAreaView,
+  Image,
 } from 'react-native';
 import {
   FormValidationMessage,
@@ -110,11 +111,30 @@ class Login extends Component {
         ],
       },
       warnForm: false,
+      keyboardIsShown: false,
     };
+  }
+
+  componentDidMount() {
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
   }
 
   componentWillUpdate() {
     clearTimeout(this._timeout);
+  }
+
+  componentWillUnmount() {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  _keyboardDidShow = () => {
+    this.setState({ keyboardIsShown: true });
+  }
+
+  _keyboardDidHide = () => {
+    this.setState({ keyboardIsShown: false });
   }
 
   handleChange = name => (val) => {
@@ -370,13 +390,36 @@ class Login extends Component {
   };
 
   render() {
-    const { userAction, warnForm } = this.state;
+    const { userAction, warnForm, keyboardIsShown } = this.state;
 
     return (
       <View style={localStyles.container}>
         <KeyboardAvoidingView behavior="padding" style={localStyles.container}>
+
           <TouchableWithoutFeedback style={localStyles.container} onPress={Keyboard.dismiss}>
+
+
             <View style={localStyles.formContainer}>
+              <View style={{
+                flex: 1,
+                alignContent: 'center',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: 20,
+              }}
+              >
+                {
+                  !keyboardIsShown
+                    ? (
+                      <Image
+                        style={{ height: 100, width: 120 }}
+                        source={{ uri: 'https://www.dropbox.com/s/ad7vso3lxrmbcg6/POCKETTABS3%404x.png?raw=1' }}
+                        resizeMode="center"
+                      />
+                    )
+                    : null
+                }
+              </View>
               <View style={{ flexDirection: 'row', marginHorizontal: 15 }}>
                 <Button
                   style={{ fontSize: 20, color: 'white' }}
