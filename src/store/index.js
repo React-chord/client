@@ -8,6 +8,9 @@ const initialState = {
   user: {
     fullname: '',
     email: '',
+    courses: {
+      practice: [],
+    },
   },
   isLoading: false,
   allChords: [],

@@ -30,10 +30,11 @@ const styles = StyleSheet.create({
     fontWeight: 'normal',
   },
   formTextInput: {
-    color: '#000',
+    color: '#fff',
     fontSize: 16,
     borderBottomWidth: 1,
     borderBottomColor: 'orange',
+    opacity: 1,
   },
   formTextContainer: {
     backgroundColor: '#fff',
