@@ -7,6 +7,7 @@ import Tuning from './src/components/Tuning';
 import Scale from './src/components/Scale';
 import Profile from './src/components/Profile';
 import ChordPractice from './src/components/ChordPractice';
+import Quiz from './src/components/Tabs';
 import Comingsoon from './src/components/Comingsoon';
 
 const userStackNavigation = createStackNavigator(
@@ -25,7 +26,7 @@ const homeStackNavigation = createStackNavigator(
     Tuning: { screen: Tuning },
     Scale: { screen: Scale },
     ChordPractice: { screen: ChordPractice },
-    Quiz: { screen: Comingsoon },
+    Quiz: { screen: Quiz },
   },
   {
     initialRouteName: 'Home',

@@ -6,6 +6,7 @@ import Orientation from 'react-native-orientation';
 import { Table, TableWrapper, Cell } from 'react-native-table-component';
 import Promise from 'bluebird';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Recording from 'react-native-recording';
 import Tuner from './TuningProcess/Tuner';
 import board from '../helpers/fretboard';
 
@@ -22,6 +23,7 @@ class Tabs extends Component {
       musics: {
         title: '',
         chords: [],
+        tempo: 0,
       },
       btnActive: false,
     };
@@ -32,29 +34,50 @@ class Tabs extends Component {
   }
 
   componentDidMount() {
-    const chords = ['C3', 'E3', 'C3', 'E3', 'F3', 'G3', 'G3'];
+    Orientation.lockToLandscape();
+    const chords = ['C3', 'E3', 'C3', 'E3', 'F3', 'G3', 'G3', 'B3', 'C4', 'B3', 'C4', 'B3', 'G3'];
+    const tempo = 3600;
+    const tempoMSec = (tempo / 3600) * 1000;
     this.setState({
       musics: {
         title: 'Gundul Pacul',
         chords: [...chords],
+        tempo: tempoMSec,
       },
     });
-    const newArray = [];
-    for (let i = 0; i < board.fretBoard.length; i++) {
-      const newCol = [];
-      for (let j = 0; j < board.fretBoard[i].length; j++) {
-        if (chords.indexOf(board.fretBoard[i][j]) !== -1 || j === 0) {
-          newCol.push(board.fretBoard[i][j]);
-        } else {
-          newCol.push(' ');
-        }
-      }
-      newArray.push(newCol);
-    }
+    // const newArray = [];
+    // for (let i = 0; i < board.fretBoard.length; i++) {
+    //   const newCol = [];
+    //   for (let j = 0; j < board.fretBoard[i].length; j++) {
+    //     if (chords.indexOf(board.fretBoard[i][j]) !== -1 || j === 0) {
+    //       newCol.push(board.fretBoard[i][j]);
+    //     } else {
+    //       newCol.push(' ');
+    //     }
+    //   }
+    //   newArray.push(newCol);
+    // }
+    const newArray = this._initiateBoard();
     console.log('new array', newArray);
     this.setState({
       fretData: [...newArray],
     });
+  }
+
+  componentWillUnmount() {
+    Orientation.lockToPortrait();
+  }
+
+  _initiateBoard() {
+    const newArray = [];
+    for (let i = 0; i < board.fretBoard.length; i++) {
+      const newCol = [];
+      for (let j = 0; j < board.fretBoard[i].length; j++) {
+        newCol.push(' ');
+      }
+      newArray.push(newCol);
+    }
+    return newArray;
   }
 
   _update(note) {
@@ -77,7 +100,7 @@ class Tabs extends Component {
 
   handleActionStop() {
     const state = this;
-    state.tuner.stop();
+    Recording.stop();
     state.setState(prevState => ({ btnActive: !prevState.btnActive }));
     state.setState({
       note: {
@@ -98,16 +121,66 @@ class Tabs extends Component {
     // } else {
     //   isActive = true;
     // }
-    state.tuner.start();
-    state.tuner.onNoteDetected = (note) => {
-      console.log('=====> active', note);
-      if (this._lastNoteName !== note.name) {
-        state._update(note);
-      } else {
-        state._lastNoteName = note.name;
-      }
-    };
+    this.displayCurrentChord();
+    // state.tuner.start();
+    // state.tuner.onNoteDetected = (note) => {
+    //   console.log('=====> active', note);
+    //   if (this._lastNoteName !== note.name) {
+    //     state._update(note);
+    //   } else {
+    //     state._lastNoteName = note.name;
+    //   }
+    // };
     state.setState(prevState => ({ btnActive: !prevState.btnActive }));
+  }
+
+  async displayCurrentChord() {
+    const { state } = this;
+    const musicsChords = state.musics.chords;
+    const newFretData = state.fretData;
+    const chordsLength = musicsChords.length;
+    const currTempo = state.musics.tempo;
+    let counter = 0;
+    console.log('state chords', state.musics.tempo);
+    this._interval = setInterval(async () => {
+      if (counter >= chordsLength) {
+        clearInterval(this._interval);
+        this.handleActionStop();
+      }
+      for (let i = 0; i < board.fretBoard.length; i++) {
+        for (let j = 0; j < board.fretBoard[i].length; j++) {
+          if (board.fretBoard[i][j] === musicsChords[counter]) {
+            newFretData[i][j] = musicsChords[counter];
+          } else {
+            newFretData[i][j] = ' ';
+          }
+        }
+      }
+      await this.setStateAsync({
+        fretData: newFretData,
+      });
+      counter++;
+    }, currTempo);
+  }
+
+  setDelay(currChord) {
+    const { state } = this;
+    const self = this;
+    const newFretData = [...state.fretData];
+    self._timeoutDetecting = setTimeout(async () => {
+      for (let i = 0; i < board.fretBoard.length; i++) {
+        for (let j = 0; j < board.fretBoard[i].length; j++) {
+          if (board.fretBoard[i][j] === currChord) {
+            newFretData[i][j] = currChord;
+          }
+        }
+      }
+      console.log('wait', newFretData);
+      await self.setStateAsync({
+        fretData: newFretData,
+      });
+      self._timeoutDetecting = null;
+    }, 1000);
   }
 
   render() {
@@ -210,10 +283,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   btnPlay: {
-    width: 60,
-    height: 60,
+    width: 50,
+    height: 50,
     backgroundColor: '#ff6f00',
-    borderRadius: 60,
+    borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -228,8 +301,8 @@ const styles = StyleSheet.create({
   },
   btnTextHit: { textAlign: 'center', color: '#fff', fontSize: 12 },
   actionButtonIcon: {
-    fontSize: 50,
-    height: 50,
+    fontSize: 45,
+    height: 45,
     color: '#263238',
     textAlign: 'center',
   },
