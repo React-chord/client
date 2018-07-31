@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import {
   View, Text, StyleSheet, StatusBar, AsyncStorage,
 } from 'react-native';
-import {
-  Avatar, Badge, Icon,
-} from 'react-native-elements';
+import { Avatar, Badge, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 import { setUser } from '../store/actions';
@@ -18,14 +16,8 @@ class Profile extends Component {
   };
 
   componentDidMount = async () => {
-    // TODO : uncomment when done
-    const { navigation, user } = this.props;
-
-    if (!user.fullname) {
-      navigation.navigate('Login');
-    } else {
-      this.countProgress(user.courses.practice);
-    }
+    const { navigation } = this.props;
+    this.navigationListener = navigation.addListener('willFocus', this._willFocusListener);
   };
 
   componentWillReceiveProps(nextProps) {
@@ -34,6 +26,21 @@ class Profile extends Component {
       this.countProgress(user.courses.practice);
     }
   }
+
+  componentWillUnmount() {
+    this.navigationListener.remove();
+  }
+
+  _willFocusListener = () => {
+    const { navigation, user } = this.props;
+    console.log('will focus', user.fullname);
+    if (!user.fullname) {
+      console.log('masuk if');
+      navigation.navigate('Login');
+    } else {
+      this.countProgress(user.courses.practice);
+    }
+  };
 
   countProgress = (course) => {
     const coursePractice = course;
@@ -76,7 +83,7 @@ class Profile extends Component {
     logout(initialUser);
     navigation.navigate('Login');
     await AsyncStorage.removeItem('token');
-  }
+  };
 
   render() {
     const { user } = this.props;
@@ -94,9 +101,10 @@ class Profile extends Component {
               rounded
               medium
             />
-            <View style={{
-              marginTop: 20,
-            }}
+            <View
+              style={{
+                marginTop: 20,
+              }}
             >
               <Badge
                 value="Logout"
@@ -129,7 +137,7 @@ class Profile extends Component {
           <View style={{ flex: 1 }}>
             <View style={{ borderBottomWidth: 1, borderBottomColor: '#ff6f00' }}>
               <Text style={{ ...localStyles.textCaption, marginLeft: 10 }}>
-                Practice Course
+Practice Course
               </Text>
             </View>
             <View style={localStyles.progressBarContainer}>

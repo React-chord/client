@@ -17,6 +17,16 @@ const userStackNavigation = createStackNavigator(
   },
   {
     initialRouteName: 'Profile',
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: '#000',
+        height: 70,
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    },
   },
 );
 
