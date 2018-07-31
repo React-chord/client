@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import {
-  View, Text, StyleSheet, StatusBar, AsyncStorage, TouchableWithoutFeedback,
+  View, Text, StyleSheet, StatusBar, AsyncStorage,
 } from 'react-native';
 import {
-  Avatar, Badge, Icon, Button,
+  Avatar, Badge, Icon,
 } from 'react-native-elements';
 import { connect } from 'react-redux';
 
+import { setUser } from '../store/actions';
 import styles from '../styles/styles';
 
 class Profile extends Component {
@@ -23,32 +24,27 @@ class Profile extends Component {
     if (!user.fullname) {
       navigation.navigate('Login');
     } else {
-      this.countProgress();
+      this.countProgress(user.courses.practice);
     }
   };
 
   componentWillReceiveProps(nextProps) {
     const { user } = nextProps;
-    console.log('will receive props ====>', user);
     if (user.fullname) {
-      this.countProgress();
+      this.countProgress(user.courses.practice);
     }
   }
 
-  countProgress = () => {
-    const { user } = this.props;
-
-    const coursePractice = user.courses.practice;
+  countProgress = (course) => {
+    const coursePractice = course;
     const initialProgress = Array(10).fill({ isCompleted: false });
 
     let completedCourseCount;
     let newPercentage;
+
     if (coursePractice && coursePractice.length > 0) {
-      console.log('masuk kondisi course practice exis', coursePractice);
       completedCourseCount = coursePractice.reduce((sum, note) => sum + note.score, 0);
-      console.log('completed course ==============>', completedCourseCount);
       newPercentage = (completedCourseCount / (coursePractice.length * 100)) * 100;
-      console.log('percentage =============>', newPercentage);
     }
 
     if (newPercentage) {
@@ -67,6 +63,20 @@ class Profile extends Component {
       percentage: newPercentage ? Math.round(newPercentage) : 0,
     });
   };
+
+  logout = async () => {
+    const { logout, navigation } = this.props;
+    const initialUser = {
+      fullname: '',
+      email: '',
+      courses: {
+        practice: [],
+      },
+    };
+    logout(initialUser);
+    navigation.navigate('Login');
+    await AsyncStorage.removeItem('token');
+  }
 
   render() {
     const { user } = this.props;
@@ -88,9 +98,6 @@ class Profile extends Component {
               marginTop: 20,
             }}
             >
-              {/* <Text>
-                Logout
-              </Text> */}
               <Badge
                 value="Logout"
                 textStyle={{ ...localStyles.text, textAlign: 'left', fontSize: 14 }}
@@ -101,6 +108,7 @@ class Profile extends Component {
                   width: 80,
                   height: 20,
                 }}
+                onPress={this.logout}
               />
             </View>
           </View>
@@ -195,7 +203,11 @@ const mapStateToProps = state => ({
   user: state.user,
 });
 
+const mapDispatchToProps = dispatch => ({
+  logout: user => dispatch(setUser(user)),
+});
+
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(Profile);
