@@ -270,8 +270,8 @@ class ChordPractice extends Component {
 
           </View>
         </View>
-        )   
-      } 
+        )
+      } else {
         return (
           <View style={styles.loading}>
             <Image style={{ width:50, height:50 }} source={require('../assets/loading.gif')} />
