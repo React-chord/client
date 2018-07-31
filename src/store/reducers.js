@@ -12,18 +12,14 @@ const chordReducers = (state, action) => {
       newState = state.scales.slice();
       const filterState = element => element.name === action.payload.name && element.octave === action.payload.octave;
       const index = newState.findIndex(filterState);
-      // console.log('payload', action.payload);
-      // console.log('newstate', newState);
-      // console.log('index', index);
 
       if (index !== -1) newState[index].hitted = true;
-      // console.log('state', state.scales);
-      // setTimeout(() => {
-      if (index !== -1) newState[index].hitted = false;
-      return { ...state, scales: newState };
-    // }, 20);
+      setTimeout(() => {
+        if (index !== -1) newState[index].hitted = false;
+        return { ...state, scales: newState };
+      }, 20);
 
-    // return { ...state, scales: newState };
+      return { ...state, scales: newState };
 
     case 'IS_LOADING':
       return {
