@@ -1,6 +1,5 @@
 import Recording from 'react-native-recording';
 import PitchFinder from 'pitchfinder';
-// import detector from "chord_detector";
 
 export default class Tuner {
   middleA = 440;
@@ -17,33 +16,13 @@ export default class Tuner {
 
   start() {
     Recording.init({
-      bufferSize: 2048,
-      sampleRate: 22050,
+      bufferSize: 4096,
+      sampleRate: 44100,
       bitsPerChannel: 16,
       channelsPerFrame: 1,
     });
     Recording.addRecordingEventListener((data) => {
-      // let sum = underscore.reduce(
-      //   data,
-      //   function(memo, num) {
-      //     return memo + num;
-      //   },
-      //   0
-      // );
-      // console.log("sum: ", sum);
       const frequency = this.pitchFinder(data);
-      console.log('frequency', frequency);
-      // const chromagram = new detector.Chromagram(1024, 44100);
-      // const chordDetector = new detector.ChordDetector();
-
-      // if (!chromagram.isReady()) return;
-      // currentChroma = chromagram.getChromagram();
-      // chordDetector.detectChord(currentChroma);
-
-      // console.log(chordDetector.rootNote());
-      // console.log(chordDetector.quality());
-
-      // chromagram.processAudioFrame(data);
       if (frequency && this.onNoteDetected) {
         const note = this.getNote(frequency);
         this.onNoteDetected({

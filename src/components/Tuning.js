@@ -24,7 +24,6 @@ export default class Tuning extends Component {
     const tuner = new Tuner();
     tuner.start();
     tuner.onNoteDetected = (note) => {
-      console.log('frequency', note);
       if (this._lastNoteName === note.name) {
         this._update(note);
       } else {

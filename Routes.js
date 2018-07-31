@@ -34,15 +34,15 @@ const homeStackNavigation = createStackNavigator(
   },
 );
 
-// homeStackNavigation.navigationOptions = ({ navigation }) => {
-//   let tabBarVisible = true;
-//   if (navigation.state.index > 0) {
-//     tabBarVisible = false;
-//   }
-//   return {
-//     tabBarVisible,
-//   };
-// };
+homeStackNavigation.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+  return {
+    tabBarVisible,
+  };
+};
 
 const bottomNavigation = createBottomTabNavigator(
   {
@@ -58,7 +58,7 @@ const bottomNavigation = createBottomTabNavigator(
         if (routeName === 'Home') {
           iconName = `ios-home${focused ? '' : '-outline'}`;
         } else if (routeName === 'Profile') {
-          iconName = `ios-contacts${focused ? '' : '-outline'}`;
+          iconName = `ios-contact${focused ? '' : '-outline'}`;
         }
         // You can return any component that you like here! We usually use an
         // icon component from react-native-vector-icons

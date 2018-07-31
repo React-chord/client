@@ -17,12 +17,11 @@ const chordReducers = (state, action) => {
       console.log('index', index);
 
       if (index !== -1) newState[index].hitted = true;
-
+      console.log('state', state.scales);
       setTimeout(() => {
         if (index !== -1) newState[index].hitted = false;
-
         return { ...state, scales: newState };
-      }, 200);
+      }, 20);
 
       return { ...state, scales: newState };
 

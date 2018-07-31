@@ -122,15 +122,15 @@ class Tabs extends Component {
     //   isActive = true;
     // }
     this.displayCurrentChord();
-    // state.tuner.start();
-    // state.tuner.onNoteDetected = (note) => {
-    //   console.log('=====> active', note);
-    //   if (this._lastNoteName !== note.name) {
-    //     state._update(note);
-    //   } else {
-    //     state._lastNoteName = note.name;
-    //   }
-    // };
+    state.tuner.start();
+    state.tuner.onNoteDetected = (note) => {
+      console.log('=====> active', note);
+      if (this._lastNoteName !== note.name) {
+        state._update(note);
+      } else {
+        state._lastNoteName = note.name;
+      }
+    };
     state.setState(prevState => ({ btnActive: !prevState.btnActive }));
   }
 

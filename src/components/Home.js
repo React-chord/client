@@ -3,7 +3,7 @@ import {
   Text, View, TouchableOpacity, StyleSheet, Image,
 } from 'react-native';
 import { connect } from 'react-redux';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/Ionicons';
 import styles from '../styles/styles';
 import { generateChords } from '../store/actions';
 
@@ -97,7 +97,7 @@ const style = StyleSheet.create({
   },
   menuBox: {
     backgroundColor: '#263238',
-    width: 130,
+    width: 100,
     height: 200,
     alignItems: 'center',
     justifyContent: 'center',

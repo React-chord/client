@@ -252,10 +252,10 @@ class ChordPractice extends Component {
                   />
                 </View>
 
-              </Carousel>
+            </Carousel>
 
-              <View style={{ flexDirection: 'row' }}>
-                <TouchableOpacity
+            <View style={{ flexDirection: 'row' }}>
+              <TouchableOpacity
                 onPress={this.handleButton.bind(this)}
                 style={styles.button}
               >
@@ -268,12 +268,12 @@ class ChordPractice extends Component {
                 </View>
               </TouchableOpacity>
 
-                {chordResult ? (
+              {chordResult ? (
                 <Icon name="ios-checkmark-circle" style={{ color: 'limegreen', fontSize: 40 }} />
               ) : (
                 <Icon name="ios-checkmark-circle" style={{ color: 'grey', fontSize: 40 }} />
               )}
-              </View>
+            </View>
 
               <View>
                 {showScore ? (
@@ -302,13 +302,15 @@ class ChordPractice extends Component {
               </View>
 
             </View>
+
           </View>
+        </View>
       );
     }
     return (
-          <View style={styles.loading}>
-            <Image style={{ width: 50, height: 50 }} source={require('../assets/loading.gif')} />
-          </View>
+      <View style={styles.loading}>
+        <Image style={{ width: 50, height: 50 }} source={require('../assets/loading.gif')} />
+      </View>
     );
   }
 }
