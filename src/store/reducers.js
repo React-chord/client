@@ -34,7 +34,12 @@ const chordReducers = (state, action) => {
     case 'SET_USER':
       return {
         ...state,
-        user: { ...action.payload },
+        user: {
+          ...action.payload,
+          courses: {
+            ...action.payload.courses,
+          },
+        },
       };
     case 'GET_CHORDS':
       const newArr = [...action.payload.map(el => (el = { ...el }))];

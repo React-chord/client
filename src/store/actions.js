@@ -99,19 +99,27 @@ const setChords = chords => ({
 });
 
 const saveScoreActions = (note, score) => async () => {
-  const token = await AsyncStorage.getItem('token')
+  const token = await AsyncStorage.getItem('token');
   try {
-    await axios.put(`${baseURL}/users/courses/practice/update`,{
-      headers:{authorization: token }
+    await axios.put(`${baseURL}/users/courses/practice/update`, {
+      headers: { authorization: token },
     }, {
-      note: note,
-      score: score
+      note,
+      score,
     });
   } catch (error) {
     throw error;
   }
-}
+};
 
 export {
-  actionIsLoading, fetchUserInfo, userLogin, userRegister, setTuning, setScales, generateChords, saveScoreActions,
+  actionIsLoading,
+  fetchUserInfo,
+  userLogin,
+  userRegister,
+  setTuning,
+  setScales,
+  generateChords,
+  saveScoreActions,
+  setUser,
 };
