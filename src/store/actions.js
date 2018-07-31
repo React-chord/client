@@ -101,10 +101,10 @@ const setChords = chords => ({
 
 const saveScoreActions = (note, score) => async () => {
   const token = await AsyncStorage.getItem('token');
-  console.log('masuk actions');
+  // console.log('masuk actions');
   try {
     if (token) {
-      console.log('masuk try');
+      // console.log('masuk try');
       await axios.put(
         `${baseURL}/users/courses/practice/update`,
         {
@@ -115,7 +115,7 @@ const saveScoreActions = (note, score) => async () => {
           headers: { authorization: token },
         },
       );
-      console.log('update sukses');
+      // console.log('update sukses');
     }
   } catch (error) {
     throw error;

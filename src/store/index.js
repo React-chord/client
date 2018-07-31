@@ -17,6 +17,6 @@ const initialState = {
   scales: [],
 };
 
-const store = createStore(reducers, initialState, applyMiddleware(thunk, logger));
+const store = createStore(reducers, initialState, applyMiddleware(thunk));
 
 export default store;
