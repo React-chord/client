@@ -149,8 +149,6 @@ android {
 
 dependencies {
     compile project(':react-native-recording')
-    compile project(':react-native-google-signin')
-    compile project(':react-native-firebase')
     compile project(':react-native-vector-icons')
     compile project(':react-native-orientation')
     implementation "com.google.android.gms:play-services-base:15.0.1"
