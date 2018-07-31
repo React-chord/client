@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Text, View, TouchableOpacity, StyleSheet, Image
+  Text, View, TouchableOpacity, StyleSheet, Image,
 } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -13,7 +13,7 @@ class Home extends Component {
   };
 
   static navigationOptions = {
-    header: null
+    header: null,
   };
 
   componentDidMount() {
@@ -29,30 +29,30 @@ class Home extends Component {
     const { navigations } = this.state;
     return (
       <View style={style.container}>
-          <TouchableOpacity style={style.menuBox} onPress={this.navigateTo('ChordPractice')}>
-            <Icon style={style.actionButtonIcon} name="md-keypad" />
-            <Text style={style.info}>
-              {`Chords`}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={style.menuBox} onPress={this.navigateTo('Scale')}>
-            <Icon style={style.actionButtonIcon} name="ios-git-merge" />
-            <Text style={style.info}>
-              {`Scales`}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={style.menuBox} onPress={this.navigateTo('Quiz')}>
-            <Icon style={style.actionButtonIcon} name="ios-play" />
-            <Text style={style.info}>
-              {`Quiz`}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={style.menuBox} onPress={this.navigateTo('Tuning')}>
-            <Icon style={style.actionButtonIcon} name="ios-radio" />
-            <Text style={style.info}>
-              {`Tunner`}
-            </Text>
-          </TouchableOpacity>
+        <TouchableOpacity style={style.menuBox} onPress={this.navigateTo('ChordPractice')}>
+          <Icon style={style.actionButtonIcon} name="md-keypad" />
+          <Text style={style.info}>
+            {'Chords'}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={style.menuBox} onPress={this.navigateTo('Scale')}>
+          <Icon style={style.actionButtonIcon} name="ios-git-merge" />
+          <Text style={style.info}>
+            {'Scales'}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={style.menuBox} onPress={this.navigateTo('Quiz')}>
+          <Icon style={style.actionButtonIcon} name="ios-play" />
+          <Text style={style.info}>
+Quiz
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={style.menuBox} onPress={this.navigateTo('Tuning')}>
+          <Icon style={style.actionButtonIcon} name="ios-radio" />
+          <Text style={style.info}>
+            {'Tunner'}
+          </Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -65,33 +65,33 @@ const style = StyleSheet.create({
     color: '#ff6f00',
     textAlign: 'center',
   },
-  container:{
+  container: {
     padding: 15,
     paddingTop: 50,
     paddingBottom: 40,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    backgroundColor: "#22262d",
+    backgroundColor: '#22262d',
   },
-  menuBox:{
-    backgroundColor: "#263238",
-    width:130,
-    height:200,
+  menuBox: {
+    backgroundColor: '#263238',
+    width: 130,
+    height: 200,
     alignItems: 'center',
     justifyContent: 'center',
-    marginHorizontal:30,
+    marginHorizontal: 30,
     marginVertical: 30,
-    borderRadius: 15
+    borderRadius: 15,
   },
   icon: {
-    width:100,
-    height:100,
+    width: 100,
+    height: 100,
   },
-  info:{
-    fontSize:20,
-    color: "white",
-    fontWeight: 'bold'
-  }
+  info: {
+    fontSize: 20,
+    color: 'white',
+    fontWeight: 'bold',
+  },
 });
 
 const mapDispatchToProps = dispatch => ({
