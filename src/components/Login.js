@@ -116,6 +116,11 @@ class Login extends Component {
   }
 
   componentDidMount() {
+    const { navigation, user } = this.props;
+
+    if (!user.fullname) {
+      navigation.setParams({ showTabBar: false });
+    }
     this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
     this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
   }
@@ -234,21 +239,18 @@ class Login extends Component {
     const { email, password, formValidation } = this.state;
     const { login, navigation } = this.props;
 
-    try {
-      if (formValidation.email && formValidation.password) {
-        const result = await login({ email, password });
-        await AsyncStorage.setItem('token', result.token);
-        navigation.navigate('Profile');
-      } else {
-        await this.setState({
-          ...initialFormState, warnForm: true,
-        });
-        this._timeout = setTimeout(() => {
-          this.setState({ warnForm: false });
-        }, 2000);
-      }
-    } catch (error) {
-      console.log(error.data);
+    if (formValidation.email && formValidation.password) {
+      const result = await login({ email, password });
+      await AsyncStorage.setItem('token', result.token);
+      Keyboard.dismiss();
+      navigation.replace('Profile');
+    } else {
+      await this.setState({
+        ...initialFormState, warnForm: true,
+      });
+      this._timeout = setTimeout(() => {
+        this.setState({ warnForm: false });
+      }, 2000);
     }
   };
 
@@ -485,12 +487,16 @@ class Login extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  user: state.user,
+});
+
 const mapDispatchToProps = dispatch => ({
   login: user => dispatch(userLogin(user)),
   register: user => dispatch(userRegister(user)),
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 )(Login);
