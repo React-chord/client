@@ -304,7 +304,6 @@ class ChordPractice extends Component {
             </View>
 
           </View>
-        </View>
       );
     }
     return (
