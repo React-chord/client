@@ -60,7 +60,6 @@ class Board extends Component {
   _handleBoardDisplay = (boardName, index) => {
     const { getScales } = this.props;
     const { boardDisplay } = this.state;
-    // console.log('...getscales', getScales);
     switch (boardDisplay) {
       case E:
         if (

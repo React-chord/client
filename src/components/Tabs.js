@@ -58,7 +58,6 @@ class Tabs extends Component {
     //   newArray.push(newCol);
     // }
     const newArray = this._initiateBoard();
-    console.log('new array', newArray);
     this.setState({
       fretData: [...newArray],
     });
@@ -124,7 +123,6 @@ class Tabs extends Component {
     this.displayCurrentChord();
     state.tuner.start();
     state.tuner.onNoteDetected = (note) => {
-      console.log('=====> active', note);
       if (this._lastNoteName !== note.name) {
         state._update(note);
       } else {
@@ -141,7 +139,6 @@ class Tabs extends Component {
     const chordsLength = musicsChords.length;
     const currTempo = state.musics.tempo;
     let counter = 0;
-    console.log('state chords', state.musics.tempo);
     this._interval = setInterval(async () => {
       if (counter >= chordsLength) {
         clearInterval(this._interval);
@@ -175,7 +172,6 @@ class Tabs extends Component {
           }
         }
       }
-      console.log('wait', newFretData);
       await self.setStateAsync({
         fretData: newFretData,
       });
