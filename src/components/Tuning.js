@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import {
   StyleSheet, Text, View, StatusBar,
 } from 'react-native';
-import Recording from 'react-native-recording';
 import Meter from './TuningProcess/Meter';
 import Note from './TuningProcess/Note';
 import Tuner from './TuningProcess/Tuner';
+
+const tuner = new Tuner();
 
 export default class Tuning extends Component {
   state = {
@@ -16,12 +17,7 @@ export default class Tuning extends Component {
     },
   };
 
-  _update(note) {
-    this.setState({ note });
-  }
-
   componentDidMount() {
-    const tuner = new Tuner();
     tuner.start();
     tuner.onNoteDetected = (note) => {
       if (this._lastNoteName === note.name) {
@@ -33,19 +29,24 @@ export default class Tuning extends Component {
   }
 
   componentWillUnmount() {
-    Recording.stop();
+    tuner.onNoteDetected = null;
+    tuner.stop();
+  }
+
+  _update(note) {
+    this.setState({ note });
   }
 
   render() {
+    const { note } = this.state;
+
     return (
       <View style={style.body}>
         <StatusBar backgroundColor="#000" translucent />
-        <Meter cents={this.state.note.cents} />
-        <Note {...this.state.note} />
+        <Meter cents={note.cents} />
+        <Note {...note} />
         <Text style={style.frequency}>
-          {this.state.note.frequency.toFixed(1)}
-          {' '}
-Hz
+          {`${note.frequency.toFixed(1)} Hz`}
         </Text>
       </View>
     );
