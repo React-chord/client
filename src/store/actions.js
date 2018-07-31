@@ -24,17 +24,17 @@ const setUser = userDetail => ({
 });
 
 const fetchUserInfo = token => async (dispatch) => {
-  console.log('action fetch info token', token);
+  // console.log('action fetch info token', token);
   try {
     const { data } = await axios.get(`${baseURL}/users/status`, {
       headers: { authorization: token },
     });
-    console.log('axios get user status');
-    console.log(data);
+    // console.log('axios get user status');
+    // console.log(data);
     dispatch(setUser(data.user));
   } catch (error) {
-    console.log('error', error);
-    console.log('error status', error.status);
+    // console.log('error', error);
+    // console.log('error status', error.status);
     await AsyncStorage.removeItem('token');
     throw error;
   }
@@ -44,13 +44,13 @@ const userLogin = user => async (dispatch) => {
   const { email, password } = user;
   try {
     const { data } = await axios.post(`${baseURL}/users/login`, { email, password });
-    console.log('await axis', data);
+    // console.log('await axis', data);
     dispatch(setUser(data.user));
     return data;
   } catch (error) {
-    console.log('error message', error.message);
-    console.log('error data', error.data);
-    console.log('error header', error.headers);
+    // console.log('error message', error.message);
+    // console.log('error data', error.data);
+    // console.log('error header', error.headers);
     throw error;
   }
 };
@@ -66,7 +66,8 @@ const userRegister = user => async () => {
 };
 
 const generateChords = () => (dispatch) => {
-  axios.get('https://api-chords.ridozaen.com/chords')
+  axios
+    .get('https://api-chords.ridozaen.com/chords')
     .then((res) => {
       const chords = [];
       res.data.chords.forEach((chord) => {
@@ -100,17 +101,21 @@ const setChords = chords => ({
 
 const saveScoreActions = (note, score) => async () => {
   const token = await AsyncStorage.getItem('token');
-  console.log('masuk actions')
+  console.log('masuk actions');
   try {
-    if(token) {
-    console.log('masuk try')
-      await axios.put(`${baseURL}/users/courses/practice/update`, {
-        note,
-        score
-      }, {
-        headers: { authorization: token },
-      });
-      console.log('update sukses')
+    if (token) {
+      console.log('masuk try');
+      await axios.put(
+        `${baseURL}/users/courses/practice/update`,
+        {
+          note,
+          score,
+        },
+        {
+          headers: { authorization: token },
+        },
+      );
+      console.log('update sukses');
     }
   } catch (error) {
     throw error;

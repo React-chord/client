@@ -38,7 +38,7 @@ class Home extends Component {
         <TouchableOpacity style={style.menuBox} onPress={this.navigateTo('Scale')}>
           <Icon style={style.actionButtonIcon} name="ios-git-merge" />
           <Text style={style.info}>
-            {'Scales'}
+Scales
           </Text>
         </TouchableOpacity>
         <TouchableOpacity style={style.menuBox} onPress={this.navigateTo('Quiz')}>
@@ -59,6 +59,28 @@ Quiz
 }
 
 const style = StyleSheet.create({
+  viewMenu: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderBottomWidth: 2,
+    borderBottomColor: '#383f4c',
+  },
+  descMenu: {
+    color: 'white',
+    width: 100,
+    textAlign: 'center',
+    paddingTop: 5,
+  },
+  touchBtn: {
+    width: 60,
+    height: 60,
+    borderRadius: 60,
+    borderColor: '#ff6f00',
+    borderWidth: 2,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   actionButtonIcon: {
     fontSize: 70,
     height: 100,
@@ -75,7 +97,7 @@ const style = StyleSheet.create({
   },
   menuBox: {
     backgroundColor: '#263238',
-    width: 130,
+    width: 100,
     height: 200,
     alignItems: 'center',
     justifyContent: 'center',

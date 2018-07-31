@@ -34,7 +34,7 @@ class Board extends Component {
   }
 
   static navigationOptions = {
-    header: null
+    header: null,
   };
 
   componentDidMount() {
@@ -51,7 +51,7 @@ class Board extends Component {
   }
 
   componentWillUnmount() {
-    Orientation.unlockAllOrientations();
+    Orientation.lockToPortrait();
     Recording.stop();
   }
 
@@ -60,7 +60,7 @@ class Board extends Component {
   _handleBoardDisplay = (boardName, index) => {
     const { getScales } = this.props;
     const { boardDisplay } = this.state;
-    console.log('...getscales', getScales);
+    // console.log('...getscales', getScales);
     switch (boardDisplay) {
       case E:
         if (
@@ -299,7 +299,7 @@ class Board extends Component {
     return (
       <View style={styles.scale}>
         <Image
-          style={ styles.fixed }
+          style={styles.fixed}
           source={{ uri: remote }}
         />
         <View style={styles.container}>
@@ -352,7 +352,7 @@ _
             { this.board_six() }
           </View>
         </View>
-        <View style={ styles.button }>
+        <View style={styles.button}>
           <Button handleSetBoard={value => this._handleSetBoard(value)} />
         </View>
       </View>
@@ -391,7 +391,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     position: 'absolute',
     marginTop: 25,
-    left: 17
+    left: 17,
   },
   topOne: {
     top: -5,
@@ -425,11 +425,11 @@ const styles = StyleSheet.create({
     bottom: 0,
     marginVertical: 30,
     marginHorizontal: 40,
-    height: 210
+    height: 210,
   },
   button: {
-    bottom: 30
-  }
+    bottom: 30,
+  },
 });
 
 const mapStateToProps = state => ({
