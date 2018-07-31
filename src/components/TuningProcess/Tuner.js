@@ -37,6 +37,10 @@ export default class Tuner {
     Recording.start();
   }
 
+  stop() {
+    Recording.stop();
+  }
+
   /**
    * get musical note from frequency
    *

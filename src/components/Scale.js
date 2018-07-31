@@ -21,6 +21,7 @@ import {
 } from './componentScale/elementScales';
 
 const remote = 'https://storage.googleapis.com/upload-portofolio/1532989580931.jpg!d';
+const tuner = new Tuner();
 
 class Board extends Component {
   constructor(props) {
@@ -40,7 +41,6 @@ class Board extends Component {
   componentDidMount() {
     Orientation.lockToLandscape();
     const { checkSound } = this.props;
-    const tuner = new Tuner();
 
     tuner.start();
     tuner.onNoteDetected = (note) => {
@@ -52,7 +52,8 @@ class Board extends Component {
 
   componentWillUnmount() {
     Orientation.lockToPortrait();
-    Recording.stop();
+    tuner.onNoteDetected = null;
+    tuner.stop();
   }
 
   _handleSetBoard = value => this.setState({ boardDisplay: value })
