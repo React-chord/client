@@ -1,70 +1,19 @@
 import React, { Component } from 'react';
 import {
-  View, Text, StyleSheet, StatusBar, AsyncStorage, Image,
+  View, Text, StyleSheet, StatusBar, AsyncStorage,
 } from 'react-native';
-import { Avatar, Badge, Icon } from 'react-native-elements';
+import {
+  Avatar, Badge, Icon,
+} from 'react-native-elements';
 import { connect } from 'react-redux';
 
+import { setUser } from '../store/actions';
 import styles from '../styles/styles';
 
-const progress = [
-  {
-    id: 1,
-    isCompleted: true,
-  },
-  {
-    id: 2,
-    isCompleted: true,
-  },
-  {
-    id: 3,
-    isCompleted: false,
-  },
-  {
-    id: 4,
-    isCompleted: true,
-  },
-  {
-    id: 5,
-    isCompleted: false,
-  },
-  {
-    id: 6,
-    isCompleted: true,
-  },
-  {
-    id: 7,
-    isCompleted: true,
-  },
-  {
-    id: 8,
-    isCompleted: false,
-  },
-  {
-    id: 9,
-    isCompleted: true,
-  },
-  {
-    id: 10,
-    isCompleted: true,
-  },
-  {
-    id: 11,
-    isCompleted: false,
-  },
-  {
-    id: 12,
-    isCompleted: true,
-  },
-  {
-    id: 13,
-    isCompleted: true,
-  },
-];
 class Profile extends Component {
   state = {
     progressBar: null,
-    percentage: null,
+    percentage: 0,
     isCounted: false,
   };
 
@@ -72,59 +21,67 @@ class Profile extends Component {
     // TODO : uncomment when done
     const { navigation, user } = this.props;
 
-    console.log('====================================');
-    console.log('will did mount');
-    console.log(this.state.progressBar);
-    console.log(this.props);
-    console.log('token');
-    console.log('====================================');
     if (!user.fullname) {
       navigation.navigate('Login');
+    } else {
+      this.countProgress(user.courses.practice);
+    }
+  };
+
+  componentWillReceiveProps(nextProps) {
+    const { user } = nextProps;
+    if (user.fullname) {
+      this.countProgress(user.courses.practice);
+    }
+  }
+
+  countProgress = (course) => {
+    const coursePractice = course;
+    const initialProgress = Array(10).fill({ isCompleted: false });
+
+    let completedCourseCount;
+    let newPercentage;
+
+    if (coursePractice && coursePractice.length > 0) {
+      completedCourseCount = coursePractice.reduce((sum, note) => sum + note.score, 0);
+      newPercentage = (completedCourseCount / (coursePractice.length * 100)) * 100;
     }
 
-    this.countProgress();
-  };
-
-  componentWillReceiveProps = async (nextProps) => {
-    const token = await AsyncStorage.getItem('token');
-    console.log('====================================');
-    console.log('will receive prop');
-    console.log(nextProps);
-    console.log('token');
-    console.log(token);
-    console.log('====================================');
-  };
-
-  countProgress = () => {
-    const initialProgress = Array(10).fill({ isCompleted: false });
-    console.log('init array =======>', initialProgress);
-
-    const completedCourseCount = progress.filter(course => course.isCompleted === true).length;
-    console.log('completed course ==============>', completedCourseCount);
-    const percentage = (completedCourseCount / progress.length) * 100;
-    console.log('percentage =============>', percentage);
-
-    initialProgress.forEach((el, i) => {
-      if (i <= percentage / 10) {
-        initialProgress[i] = { isCompleted: true };
-      }
-    });
+    if (newPercentage) {
+      initialProgress.forEach((el, i) => {
+        if (i <= newPercentage / 10) {
+          initialProgress[i] = { isCompleted: true };
+        }
+      });
+    }
 
     console.log('counted', initialProgress);
 
     this.setState({
       progressBar: initialProgress,
       isCounted: true,
-      percentage,
+      percentage: newPercentage ? Math.round(newPercentage) : 0,
     });
   };
 
+  logout = async () => {
+    const { logout, navigation } = this.props;
+    const initialUser = {
+      fullname: '',
+      email: '',
+      courses: {
+        practice: [],
+      },
+    };
+    logout(initialUser);
+    navigation.navigate('Login');
+    await AsyncStorage.removeItem('token');
+  }
+
   render() {
     const { user } = this.props;
-    const { progressBar, isCounted } = this.state;
+    const { progressBar, isCounted, percentage } = this.state;
     const avatarUri = 'https://t3.ftcdn.net/jpg/00/64/67/80/240_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg';
-
-    console.log('render profile =========> ', user);
 
     return (
       <View style={styles.container}>
@@ -137,25 +94,44 @@ class Profile extends Component {
               rounded
               medium
             />
+            <View style={{
+              marginTop: 20,
+            }}
+            >
+              <Badge
+                value="Logout"
+                textStyle={{ ...localStyles.text, textAlign: 'left', fontSize: 14 }}
+                containerStyle={{
+                  backgroundColor: '#C70039',
+                  marginTop: 30,
+                  marginLeft: 10,
+                  width: 80,
+                  height: 20,
+                }}
+                onPress={this.logout}
+              />
+            </View>
           </View>
           <View style={{ flex: 1 }}>
             <Badge
               value={user.fullname}
-              textStyle={localStyles.text}
+              textStyle={{ ...localStyles.text, textAlign: 'right' }}
               containerStyle={localStyles.textContainer}
             />
             {user.email ? (
-              <Text style={localStyles.textCaption}>
+              <Text style={{ ...localStyles.textCaption, textAlign: 'right', marginRight: 10 }}>
                 {user.email.toLowerCase()}
               </Text>
             ) : null}
           </View>
         </View>
         <View style={localStyles.userProgressContainer}>
-          <View style={{ flex: 1, borderWidth: 1, borderColor: 'blue' }}>
-            <Text style={localStyles.headline}>
-              Progress
-            </Text>
+          <View style={{ flex: 1 }}>
+            <View style={{ borderBottomWidth: 1, borderBottomColor: '#ff6f00' }}>
+              <Text style={{ ...localStyles.textCaption, marginLeft: 10 }}>
+                Practice Course
+              </Text>
+            </View>
             <View style={localStyles.progressBarContainer}>
               {isCounted && progressBar
                 ? progressBar.map((el, i) => (
@@ -167,6 +143,9 @@ class Profile extends Component {
                   />
                 ))
                 : null}
+              <Text style={{ ...localStyles.textCaption, marginLeft: 10 }}>
+                {`${percentage} %`}
+              </Text>
             </View>
           </View>
         </View>
@@ -190,8 +169,6 @@ const localStyles = StyleSheet.create({
     alignContent: 'flex-start',
     justifyContent: 'flex-start',
     flexDirection: 'row',
-    borderWidth: 1,
-    borderColor: 'red',
   },
   headline: {
     color: 'white',
@@ -219,13 +196,18 @@ const localStyles = StyleSheet.create({
     flexDirection: 'row',
     marginLeft: 10,
   },
+  progressTextContainer: {},
 });
 
 const mapStateToProps = state => ({
   user: state.user,
 });
 
+const mapDispatchToProps = dispatch => ({
+  logout: user => dispatch(setUser(user)),
+});
+
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(Profile);
