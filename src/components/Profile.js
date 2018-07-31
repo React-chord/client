@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
   View, Text, StyleSheet, StatusBar, AsyncStorage,
 } from 'react-native';
-import { Avatar, Badge, Icon } from 'react-native-elements';
+import { Avatar, Badge } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { Circle } from 'react-native-progress';
 
@@ -11,9 +11,9 @@ import styles from '../styles/styles';
 
 class Profile extends Component {
   state = {
-    progressBar: null,
     percentage: 0,
-    isCounted: false,
+    // progressBar: null,
+    // isCounted: false,
   };
 
   componentDidMount = async () => {
@@ -62,8 +62,8 @@ class Profile extends Component {
     }
 
     this.setState({
-      progressBar: initialProgress,
-      isCounted: true,
+      // progressBar: initialProgress,
+      // isCounted: true,
       percentage: newPercentage ? Math.round(newPercentage) : 0,
     });
   };
@@ -84,7 +84,7 @@ class Profile extends Component {
 
   render() {
     const { user } = this.props;
-    const { progressBar, isCounted, percentage } = this.state;
+    const { percentage } = this.state;
     const avatarUri = 'https://t3.ftcdn.net/jpg/00/64/67/80/240_F_64678017_zUpiZFjj04cnLri7oADnyMH0XBYyQghG.jpg';
 
     return (
