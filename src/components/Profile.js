@@ -4,6 +4,7 @@ import {
 } from 'react-native';
 import { Avatar, Badge, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
+import { Circle } from 'react-native-progress';
 
 import { setUser } from '../store/actions';
 import styles from '../styles/styles';
@@ -97,59 +98,52 @@ class Profile extends Component {
               rounded
               medium
             />
-            <View
-              style={{
-                marginTop: 20,
-              }}
-            >
-              <Badge
-                value="Logout"
-                textStyle={{ ...localStyles.text, textAlign: 'left', fontSize: 14 }}
-                containerStyle={{
-                  backgroundColor: '#C70039',
-                  marginTop: 30,
-                  marginLeft: 10,
-                  width: 80,
-                  height: 20,
-                }}
-                onPress={this.logout}
-              />
-            </View>
-          </View>
-          <View style={{ flex: 1 }}>
             <Badge
               value={user.fullname}
-              textStyle={{ ...localStyles.text, textAlign: 'right' }}
-              containerStyle={localStyles.textContainer}
+              textStyle={{ ...localStyles.text, textAlign: 'left' }}
+              containerStyle={{ ...localStyles.textContainer, marginTop: 10 }}
             />
             {user.email ? (
-              <Text style={{ ...localStyles.textCaption, textAlign: 'right', marginRight: 10 }}>
+              <Text style={{ ...localStyles.textCaption, textAlign: 'left', marginLeft: 10 }}>
                 {user.email.toLowerCase()}
               </Text>
             ) : null}
+          </View>
+          <View style={{ flex: 1, alignItems: 'flex-end' }}>
+            <Badge
+              value="Logout"
+              textStyle={{ ...localStyles.text, textAlign: 'right', fontSize: 14 }}
+              containerStyle={{
+                backgroundColor: '#C70039',
+                marginRight: 10,
+                marginTop: 10,
+                width: 80,
+                height: 20,
+              }}
+              onPress={this.logout}
+            />
           </View>
         </View>
         <View style={localStyles.userProgressContainer}>
           <View style={{ flex: 1 }}>
             <View style={{ borderBottomWidth: 1, borderBottomColor: '#ff6f00' }}>
               <Text style={{ ...localStyles.textCaption, marginLeft: 10 }}>
-Practice Course
+                Practice Course
               </Text>
             </View>
             <View style={localStyles.progressBarContainer}>
-              {isCounted && progressBar
-                ? progressBar.map((el, i) => (
-                  <Icon
-                    type="material-community"
-                    name="bandcamp"
-                    color={el.isCompleted ? '#ff6f00' : 'white'}
-                    key={i}
-                  />
-                ))
-                : null}
-              <Text style={{ ...localStyles.textCaption, marginLeft: 10 }}>
-                {`${percentage} %`}
-              </Text>
+              <View style={localStyles.progressInnerContainer}>
+                <Circle
+                  progress={percentage / 100}
+                  size={200}
+                  thickness={5}
+                  borderWidth={4}
+                  textStyle={{ color: 'white' }}
+                  borderColor="rgba(255, 111, 0, 0.5)"
+                  color="#ff6f00"
+                  showsText
+                />
+              </View>
             </View>
           </View>
         </View>
@@ -165,7 +159,6 @@ const localStyles = StyleSheet.create({
     alignItems: 'flex-start',
     alignContent: 'flex-start',
     justifyContent: 'flex-start',
-    // width: '100%',
   },
   userProgressContainer: {
     flex: 2,
@@ -173,6 +166,14 @@ const localStyles = StyleSheet.create({
     alignContent: 'flex-start',
     justifyContent: 'flex-start',
     flexDirection: 'row',
+  },
+  progressInnerContainer: {
+    flex: 1,
+    alignContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    paddingTop: 18,
   },
   headline: {
     color: 'white',
