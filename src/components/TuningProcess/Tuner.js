@@ -22,6 +22,7 @@ export default class Tuner {
       channelsPerFrame: 1,
     });
     Recording.addRecordingEventListener((data) => {
+      console.log('recording di tuner');
       const frequency = this.pitchFinder(data);
       if (frequency && this.onNoteDetected) {
         const note = this.getNote(frequency);
@@ -38,6 +39,7 @@ export default class Tuner {
   }
 
   stop() {
+    Recording.addRecordingEventListener().remove();
     Recording.stop();
   }
 

@@ -20,6 +20,7 @@ export default class Tuning extends Component {
   componentDidMount() {
     tuner.start();
     tuner.onNoteDetected = (note) => {
+      console.log('recording di tuning');
       if (this._lastNoteName === note.name) {
         this._update(note);
       } else {
@@ -29,6 +30,7 @@ export default class Tuning extends Component {
   }
 
   componentWillUnmount() {
+    console.log('unmount ======================');
     tuner.onNoteDetected = null;
     tuner.stop();
   }

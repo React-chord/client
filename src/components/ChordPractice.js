@@ -12,11 +12,11 @@ import Promise from 'bluebird';
 import { generateChords, saveScoreActions } from '../store/actions';
 
 class ChordPractice extends Component {
-  middleA = 440
+  middleA = 440;
 
-  semitone = 69
+  semitone = 69;
 
-  noteStrings = ['C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B']
+  noteStrings = ['C', 'C♯', 'D', 'D♯', 'E', 'F', 'F♯', 'G', 'G♯', 'A', 'A♯', 'B'];
 
   constructor(props) {
     super(props);
@@ -50,7 +50,27 @@ class ChordPractice extends Component {
     });
   }
 
+  componentWillUnmount() {
+    console.log(this._setTimeout, this._timeoutDetecting);
+    clearTimeout(this._timeoutDetecting);
+    clearTimeout(this._setTimeout);
+    Recording.addRecordingEventListener().remove();
+    console.log('will unmount');
+    this.setState({
+      chordResult: false,
+      currentIndex: 0,
+      buttonState: false,
+      isListening: false,
+    });
+    Recording.stop();
+  }
+
   start() {
+    const { isListening } = this.state;
+    console.log('update state');
+
+    this.setState({ isListening: true });
+
     Recording.init({
       bufferSize: this.bufferSize,
       sampleRate: this.sampleRate,
@@ -59,7 +79,8 @@ class ChordPractice extends Component {
     });
     Recording.addRecordingEventListener((data) => {
       const frequency = this.pitchFinder(data);
-      if (frequency) {
+      if (frequency && isListening) {
+        console.log('listeng');
         const note = this.getNote(frequency);
         const chordRead = this.noteStrings[note % 12];
         this.compareChord(chordRead);
@@ -75,15 +96,15 @@ class ChordPractice extends Component {
       await this.setState({ isListening: true });
     }
 
-    if ((chords[currentIndex].chord === chordRead) && isListening) {
+    if (chords[currentIndex].chord === chordRead && isListening) {
       await this.setState({
         chordResult: true,
         hitCount: hitCount + 1,
         isListening: false,
       });
-      this._timeoutDetecting = setTimeout(async () => {
-        await this.setState({ isListening: true, chordResult: false });
-        this._timeoutDetecting = null;
+      this._timeoutDetecting = setTimeout(() => {
+        this.setState({ isListening: true, chordResult: false });
+        clearTimeout(this._timeoutDetecting);
       }, 1000);
     } else {
       await this.setState({
@@ -97,14 +118,6 @@ class ChordPractice extends Component {
     return Math.round(note) + this.semitone;
   }
 
-  componentWillUnmount() {
-    this.setState({
-      chordResult: false,
-      currentIndex: 0,
-      buttonState: false,
-    });
-  }
-
   getScore() {
     const score = this.state.hitCount * 20;
     this.setState({
@@ -114,11 +127,10 @@ class ChordPractice extends Component {
 
   saveUserScore() {
     const { chords, saveScore } = this.props;
-    const { currentIndex } = this.state;
+    const { currentIndex, score } = this.state;
 
-    const score = this.state.score;
     const note = chords[currentIndex].chord;
-    console.log('masuk component')
+    console.log('masuk component');
     saveScore(note, score);
   }
 
@@ -158,6 +170,7 @@ class ChordPractice extends Component {
       buttonState: true,
     });
     this._setTimeout = setTimeout(() => {
+      console.log('kepanggil');
       this.handleState();
       Recording.stop();
       this.getScore();
@@ -167,98 +180,72 @@ class ChordPractice extends Component {
 
   render() {
     const {
-      chordResult, buttonState, score, hitCount, showScore 
+      chordResult, buttonState, score, hitCount, showScore,
     } = this.state;
     if (this.props.chords.length > 0) {
       return (
-          <View style={styles.mainContainer}>
-            <View style={styles.container}>
-              <Carousel
-                width={375}
-                height={500}
-                hideIndicators
-                initialPage={0}
-                animate={false}
-                onPageChange ={() => this.handleChange()}
-              >
+        <View style={styles.mainContainer}>
+          <View style={styles.container}>
+            <Carousel
+              width={375}
+              height={500}
+              hideIndicators
+              initialPage={0}
+              animate={false}
+              onPageChange={() => this.handleChange()}
+            >
+              <View style={styles.contentContainer}>
+                <Text style={styles.text}>
+                  {this.props.chords[0].chord}
+                </Text>
+                <Image source={{ uri: this.props.chords[0].imageUrl }} style={styles.image} />
+              </View>
 
-                <View style={styles.contentContainer}>
-                  <Text style={styles.text}>
-                    {this.props.chords[0].chord}
-                  </Text>
-                  <Image
-                    source={{ uri: this.props.chords[0].imageUrl }}
-                    style={styles.image}
-                  />
-                </View>
+              <View style={styles.contentContainer}>
+                <Text style={styles.text}>
+                  {this.props.chords[1].chord}
+                </Text>
+                <Image source={{ uri: this.props.chords[1].imageUrl }} style={styles.image} />
+              </View>
 
-                <View style={styles.contentContainer}>
-                  <Text style={styles.text}>
-                    {this.props.chords[1].chord}
-                  </Text>
-                  <Image
-                    source={{ uri: this.props.chords[1].imageUrl }}
-                    style={styles.image}
-                  />
-                </View>
+              <View style={styles.contentContainer}>
+                <Text style={styles.text}>
+                  {this.props.chords[2].chord}
+                </Text>
+                <Image source={{ uri: this.props.chords[2].imageUrl }} style={styles.image} />
+              </View>
 
-                <View style={styles.contentContainer}>
-                  <Text style={styles.text}>
-                    {this.props.chords[2].chord}
-                  </Text>
-                  <Image
-                    source={{ uri: this.props.chords[2].imageUrl }}
-                    style={styles.image}
-                  />
-                </View>
+              <View style={styles.contentContainer}>
+                <Text style={styles.text}>
+                  {this.props.chords[3].chord}
+                </Text>
+                <Image source={{ uri: this.props.chords[3].imageUrl }} style={styles.image} />
+              </View>
 
-                <View style={styles.contentContainer}>
-                  <Text style={styles.text}>
-                    {this.props.chords[3].chord}
-                  </Text>
-                  <Image
-                    source={{ uri: this.props.chords[3].imageUrl }}
-                    style={styles.image}
-                  />
-                </View>
+              <View style={styles.contentContainer}>
+                <Text style={styles.text}>
+                  {this.props.chords[4].chord}
+                </Text>
+                <Image source={{ uri: this.props.chords[4].imageUrl }} style={styles.image} />
+              </View>
 
-                <View style={styles.contentContainer}>
-                  <Text style={styles.text}>
-                    {this.props.chords[4].chord}
-                  </Text>
-                  <Image
-                    source={{ uri: this.props.chords[4].imageUrl }}
-                    style={styles.image}
-                  />
-                </View>
+              <View style={styles.contentContainer}>
+                <Text style={styles.text}>
+                  {this.props.chords[5].chord}
+                </Text>
+                <Image source={{ uri: this.props.chords[5].imageUrl }} style={styles.image} />
+              </View>
 
-                <View style={styles.contentContainer}>
-                  <Text style={styles.text}>
-                    {this.props.chords[5].chord}
-                  </Text>
-                  <Image
-                    source={{ uri: this.props.chords[5].imageUrl }}
-                    style={styles.image}
-                  />
-                </View>
-
-                <View style={styles.contentContainer}>
-                  <Text style={styles.text}>
-                    {this.props.chords[6].chord}
-                  </Text>
-                  <Image
-                    source={{ uri: this.props.chords[6].imageUrl }}
-                    style={styles.image}
-                  />
-                </View>
-
+              <View style={styles.contentContainer}>
+                <Text style={styles.text}>
+                  {this.props.chords[6].chord}
+                </Text>
+                <Image source={{ uri: this.props.chords[6].imageUrl }} style={styles.image} />
+              </View>
             </Carousel>
 
             <View style={{ flexDirection: 'row' }}>
-              <TouchableOpacity
-                onPress={this.handleButton.bind(this)}
-                style={styles.button}
-              >
+              <TouchableOpacity onPress={this.handleButton.bind(this)} style={styles.button}>
                 <View>
                   {buttonState ? (
                     <Icon style={styles.buttonIcon} name="ios-pause" />
@@ -275,35 +262,31 @@ class ChordPractice extends Component {
               )}
             </View>
 
-              <View>
-                {showScore ? (
-                  <View style={styles.score}>
-                    <Text style={styles.resultText1}>
-                      Count :
-                      {' '}
-                      {hitCount}
-                    </Text>
-                    <Text style={styles.resultText}>
-                      Score :
-                      {' '}
-                      {score}
-                      %
-                    </Text>
-                  </View>
-                ) : (
-                  <View style={{ marginTop: 20 }}>
-                    <Text style={styles.resultText}>
-                      Count :
-                      {' '}
-                      {hitCount}
-                    </Text>
-                  </View>
-                )}
-              </View>
-
+            <View>
+              {showScore ? (
+                <View style={styles.score}>
+                  <Text style={styles.resultText1}>
+                    Count :
+                    {hitCount}
+                  </Text>
+                  <Text style={styles.resultText}>
+                    Score :
+                    {' '}
+                    {score}
+                    %
+                  </Text>
+                </View>
+              ) : (
+                <View style={{ marginTop: 20 }}>
+                  <Text style={styles.resultText}>
+                    Count :
+                    {hitCount}
+                  </Text>
+                </View>
+              )}
             </View>
-
           </View>
+        </View>
       );
     }
     return (
@@ -323,7 +306,10 @@ const mapDispatchToProps = dispatch => ({
   saveScore: (note, score) => dispatch(saveScoreActions(note, score)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChordPractice);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ChordPractice);
 
 const styles = StyleSheet.create({
   mainContainer: {

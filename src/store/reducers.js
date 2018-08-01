@@ -10,7 +10,10 @@ const chordReducers = (state, action) => {
 
     case 'SET_TUNING':
       newState = state.scales.slice();
-      const filterState = element => element.name === action.payload.name && element.octave === action.payload.octave;
+      const filterState = (element) => {
+        console.log('set tuning ================', element);
+        return element.name === action.payload.name && element.octave === action.payload.octave;
+      };
       const index = newState.findIndex(filterState);
 
       if (index !== -1) newState[index].hitted = true;

@@ -44,6 +44,7 @@ class Board extends Component {
 
     tuner.start();
     tuner.onNoteDetected = (note) => {
+      console.log('detecting di scale');
       if (this.state.boardDisplay !== Initial) {
         checkSound(note);
       }

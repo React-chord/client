@@ -10,6 +10,8 @@ import Recording from 'react-native-recording';
 import Tuner from './TuningProcess/Tuner';
 import board from '../helpers/fretboard';
 
+const tuner = new Tuner();
+
 class Tabs extends Component {
   constructor(props) {
     super(props);
@@ -34,6 +36,9 @@ class Tabs extends Component {
   }
 
   componentDidMount() {
+    const { navigation } = this.props;
+
+    this.navigationWillBlurListener = navigation.addListener('willBlur', this._willBlur);
     Orientation.lockToLandscape();
     const chords = ['C3', 'E3', 'C3', 'E3', 'F3', 'G3', 'G3', 'B3', 'C4', 'B3', 'C4', 'B3', 'G3'];
     const tempo = 3600;
@@ -64,8 +69,18 @@ class Tabs extends Component {
   }
 
   componentWillUnmount() {
+    console.log('will unmount');
+
+    this.navigationWillBlurListener.remove();
+    tuner.onNoteDetected = null;
+    tuner.stop();
+    clearInterval(this._interval);
     Orientation.lockToPortrait();
   }
+
+  _willBlur = () => {
+    console.log('will blur');
+  };
 
   _initiateBoard() {
     const newArray = [];
@@ -99,7 +114,10 @@ class Tabs extends Component {
 
   handleActionStop() {
     const state = this;
-    Recording.stop();
+
+    tuner.stop();
+    tuner.onNoteDetected = null;
+
     state.setState(prevState => ({ btnActive: !prevState.btnActive }));
     state.setState({
       note: {
@@ -121,8 +139,8 @@ class Tabs extends Component {
     //   isActive = true;
     // }
     this.displayCurrentChord();
-    state.tuner.start();
-    state.tuner.onNoteDetected = (note) => {
+    tuner.start();
+    tuner.onNoteDetected = (note) => {
       if (this._lastNoteName !== note.name) {
         state._update(note);
       } else {
@@ -153,6 +171,7 @@ class Tabs extends Component {
           }
         }
       }
+      console.log('update state');
       await this.setStateAsync({
         fretData: newFretData,
       });
