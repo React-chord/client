@@ -7,39 +7,39 @@ export const e = [
   {
     name: 'F♯',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'G♯',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'A',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'B',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'C♯',
     octave: 3,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'D♯',
     octave: 3,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'E',
     octave: 3,
-    hitted: false
+    hitted: false,
   },
-]
+];
 
 export const f = [
   {
@@ -50,39 +50,39 @@ export const f = [
   {
     name: 'G',
     octave: 1,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'A',
     octave: 1,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'A♯',
     octave: 1,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'C',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'D',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'E',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'F',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
-]
+];
 
 export const g = [
   {
@@ -93,39 +93,39 @@ export const g = [
   {
     name: 'A',
     octave: 1,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'B',
     octave: 1,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'C',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'D',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'E',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'F♯',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'G',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
-]
+];
 
 export const a = [
   {
@@ -136,39 +136,39 @@ export const a = [
   {
     name: 'B',
     octave: 1,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'C♯',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'D',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'E',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'F♯',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'G♯',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'A',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
-]
+];
 
 export const b = [
   {
@@ -179,39 +179,39 @@ export const b = [
   {
     name: 'C♯',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'D♯',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'E',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'F♯',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'G♯',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'A♯',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'B',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
-]
+];
 
 export const c = [
   {
@@ -222,82 +222,82 @@ export const c = [
   {
     name: 'D',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'E',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'F',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'G',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'A',
     octave: 3,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'B',
     octave: 3,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'C',
     octave: 3,
-    hitted: false
+    hitted: false,
   },
-]
+];
 
 export const d = [
   {
     name: 'D',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'E',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'F♯',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'G',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'A',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'B',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'C♯',
     octave: 3,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'D',
     octave: 3,
-    hitted: false
-  }
-]
+    hitted: false,
+  },
+];
 
 export const f2 = [
   {
@@ -308,39 +308,39 @@ export const f2 = [
   {
     name: 'G♯',
     octave: 1,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'A♯',
     octave: 1,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'B',
     octave: 1,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'C♯',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'D♯',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'F',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'F♯',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
-]
+];
 
 export const g2 = [
   {
@@ -351,39 +351,39 @@ export const g2 = [
   {
     name: 'A♯',
     octave: 1,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'C',
     octave: 1,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'C♯',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'D♯',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'F',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'G',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'G♯',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
-]
+];
 
 export const a2 = [
   {
@@ -394,39 +394,39 @@ export const a2 = [
   {
     name: 'C',
     octave: 1,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'D',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'D♯',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'F',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'G',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'A',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'A♯',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
-]
+];
 
 export const c2 = [
   {
@@ -437,79 +437,79 @@ export const c2 = [
   {
     name: 'D♯',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'F',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'F♯',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'G♯',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'A♯',
     octave: 3,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'C',
     octave: 3,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'C♯',
     octave: 3,
-    hitted: false
+    hitted: false,
   },
-]
+];
 
 export const d2 = [
   {
     name: 'D♯',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'F',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'G',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'G♯',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'A♯',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'C',
     octave: 2,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'D',
     octave: 3,
-    hitted: false
+    hitted: false,
   },
   {
     name: 'D♯',
     octave: 3,
-    hitted: false
-  }
-]
+    hitted: false,
+  },
+];

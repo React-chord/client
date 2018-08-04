@@ -1,10 +1,22 @@
 {
-    "extends": "airbnb",
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-        "react/prefer-stateless-function": 0,
-        "react/jsx-filename-extension": 0
-    }
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "plugins": ["react", "jsx-a11y"],
+  "rules": {
+    "react/prefer-stateless-function": 0,
+    "react/jsx-filename-extension": 0,
+    "react/prop-types": 0,
+    "react/no-array-index-key": 0,
+    "no-console": "off",
+    "no-plusplus": "off",
+    "no-underscore-dangle": "off",
+    "no-use-before-define": "off",
+    "radix":"off",
+    "no-restricted-properties":"off",
+    "no-case-declarations":"off",
+    "no-return-assign":"off",
+    "no-param-reassign":"off",
+    "no-redeclare":"off",
+    "class-methods-use-this": "off"
+  }
 }

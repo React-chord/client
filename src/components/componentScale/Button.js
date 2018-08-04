@@ -1,134 +1,135 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity
+  View, StyleSheet, Text, TouchableOpacity,
 } from 'react-native';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
-import { setScales } from '../../store/actions'
+import { setScales } from '../../store/actions';
 
-import { G, A, B, C, D, E, F, F2, G2, A2, C2, D2 } from './scales'
-import { e, f, g, a, b, c, d, f2, g2, a2, c2, d2 } from './elementScales'
+import {
+  G, A, B, C, D, E, F, F2, G2, A2, C2, D2, Initial,
+} from './scales';
+import {
+  e, f, g, a, b, c, d, f2, g2, a2, c2, d2,
+} from './elementScales';
 
 class Board extends Component {
-
-  constructor (props) {
-    super (props)
+  constructor(props) {
+    super(props);
     this.state = {
-      boardDisplay: [['E','F','G','A','B','C','D'],
-                    ['F2','G2','A2', 'C2','D2']]
-    }
+      boardDisplay: [['E', 'F', 'G', 'A', 'B', 'C', 'D'], ['F2', 'G2', 'A2', 'C2', 'D2']],
+    };
 
-    this.coordinate = this.coordinate.bind(this)
+    this.coordinate = this.coordinate.bind(this);
   }
 
-  componentDidMount () {
-    this.props.generateBoard
+  componentDidMount() {
+    this.props.generateBoard;
   }
 
-  coordinate (board, index) {
-    const { handleSetBoard, addScales } = this.props
-    let boardActived
+  coordinate(board, index) {
+    const { handleSetBoard, addScales } = this.props;
+    let boardActived;
 
     switch (index) {
       case 0:
         if (board === 1) {
-          boardActived = E
-          addScales(e)
+          boardActived = E;
+          addScales(e);
         } else if (board === 2) {
-          boardActived = F2
-          addScales(f2)
+          boardActived = F2;
+          addScales(f2);
         }
-        ; break
+        break;
       case 1:
         if (board == 1) {
-          boardActived = F
-          addScales(f)
+          boardActived = F;
+          addScales(f);
         } else if (board == 2) {
-          boardActived = G2
-          addScales(g2)
-        } ; break
+          boardActived = G2;
+          addScales(g2);
+        }
+        break;
       case 2:
         if (board == 1) {
-          boardActived = G
-          addScales(g)
+          boardActived = G;
+          addScales(g);
         } else if (board == 2) {
-          boardActived = A2
-          addScales(a2)
-        } ; break
+          boardActived = A2;
+          addScales(a2);
+        }
+        break;
       case 3:
         if (board == 1) {
-          boardActived = A
-          addScales(a)
+          boardActived = A;
+          addScales(a);
         } else if (board == 2) {
-          boardActived = C2
-          addScales(c2)
-        } ; break
+          boardActived = C2;
+          addScales(c2);
+        }
+        break;
       case 4:
         if (board == 1) {
-          boardActived = B
-          addScales(b)
+          boardActived = B;
+          addScales(b);
         } else if (board == 2) {
-          boardActived = D2
-          addScales(d2)
-        } ; break
+          boardActived = D2;
+          addScales(d2);
+        }
+        break;
       case 5:
-        boardActived = C
-        addScales(c)
-        ; break
+        boardActived = C;
+        addScales(c);
+        break;
       case 6:
-        boardActived = D
-        addScales(d)
-        ; break
+        boardActived = D;
+        addScales(d);
+        break;
       default:
-        boardActived = Initial
+        boardActived = Initial;
     }
 
-    return handleSetBoard(boardActived)
+    return handleSetBoard(boardActived);
   }
 
-  board () {
-    return this.props.board
+  board() {
+    return this.props.board;
   }
 
-  board_one () {
-    return (
-      this.state.boardDisplay[0].map((col, i) => {
-        return (
-            <TouchableOpacity onPress={() => this.coordinate(1, i)} style={styles.newButton} key={i}>
-              <Text style={{color: 'white'}}>{col}</Text>
-            </TouchableOpacity>
-          )
-        })
-      )
+  board_one() {
+    return this.state.boardDisplay[0].map((col, i) => (
+      <TouchableOpacity onPress={() => this.coordinate(1, i)} style={styles.newButton} key={i}>
+        <Text style={{ color: 'white' }}>
+          {col}
+        </Text>
+      </TouchableOpacity>
+    ));
   }
 
-  board_two () {
-    return (
-      this.state.boardDisplay[1].map((col, i) => {
-        return (
-            <TouchableOpacity onPress={() => this.coordinate(2, i)} style={styles.newButton} key={i}>
-              <Text style={{color: 'white'}}>{col}</Text>
-            </TouchableOpacity>
-          )
-        })
-      )
+  board_two() {
+    return this.state.boardDisplay[1].map((col, i) => (
+      <TouchableOpacity onPress={() => this.coordinate(2, i)} style={styles.newButton} key={i}>
+        <Text style={{ color: 'white' }}>
+          {col}
+        </Text>
+      </TouchableOpacity>
+    ));
   }
 
-  render () {
+  render() {
     return (
       <View style={styles.container}>
-        <Text>{ this.state.touchrow }</Text>
+        <Text>
+          {this.state.touchrow}
+        </Text>
         <View style={[styles.rowAlpha, styles.topOne]}>
-          { this.board_one() }
+          {this.board_one()}
         </View>
         <View style={[styles.rowAlpha, styles.topTwo]}>
-          { this.board_two() }
+          {this.board_two()}
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -136,19 +137,20 @@ const styles = StyleSheet.create({
   newButton: {
     width: 80,
     height: 30,
-    backgroundColor: '#000000',
+    backgroundColor: '#37474f',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 4,
-    margin: 5
+    margin: 2,
+    bottom: 5,
   },
   flexContainer: {
-    height:200,
-    width:500,
+    height: 200,
+    width: 500,
   },
   btnFlex: {
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   btn: {
     width: 20,
@@ -156,7 +158,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    top: 200
+    top: 200,
   },
   gamestatus: {
     width: '100%',
@@ -173,28 +175,29 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   topOne: {
-    bottom: 235
+    bottom: 235,
   },
   topTwo: {
-    bottom: 200
+    bottom: 200,
   },
   instructions: {
     color: '#225344',
     marginLeft: 24,
     marginRight: 24,
     fontSize: 12,
-    lineHeight: 18
+    lineHeight: 18,
   },
   boardicon: {
     alignItems: 'center',
-    marginTop: 20
+    marginTop: 20,
   },
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addScales: (scales) => dispatch(setScales(scales))
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  addScales: scales => dispatch(setScales(scales)),
+});
 
-export default connect(null, mapDispatchToProps)(Board)
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Board);

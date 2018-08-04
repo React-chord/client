@@ -7,18 +7,31 @@
  */
 
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
 import Permissions from 'react-native-permissions';
+import { connect } from 'react-redux';
+import { AsyncStorage } from 'react-native';
 
-import store from './src/store/index';
+import { fetchUserInfo } from './src/store/actions';
 import Routes from './Routes';
 
-export default class App extends Component {
-
-  async componentDidMount () {
+class App extends Component {
+  async componentDidMount() {
     await this.checkPermission();
+    await this.checkAsyncStorage();
   }
-  
+
+  checkAsyncStorage = async () => {
+    const { fetchUser } = this.props;
+    try {
+      const token = await AsyncStorage.getItem('token');
+      if (token) {
+        fetchUser(token);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   checkPermission = async () => {
     const p = await Permissions.check('microphone');
     console.log('permission check', p);
@@ -31,12 +44,15 @@ export default class App extends Component {
     console.log('permission request', p);
   };
 
-    render () {
-      return (
-        <Provider store={store}>
-          <Routes />
-        </Provider>
-      )
-    }
-
+  render() {
+    return (
+      <Routes />
+    );
+  }
 }
+
+const mapDispatchToProps = dispatch => ({
+  fetchUser: token => dispatch(fetchUserInfo(token)),
+});
+
+export default connect(null, mapDispatchToProps)(App);
